@@ -43,6 +43,7 @@
   <link rel="stylesheet" href="css/achievement-wall.css" />
   <link rel="stylesheet" href="css/experience-polish.css" />
   <link rel="stylesheet" href="css/admin-dashboard.css" />
+  <link rel="stylesheet" href="css/featured-gallery.css" />
   <script>try{if(sessionStorage.getItem("vvcOfficialProfileLoaded")==="1")document.documentElement.classList.remove("profile-loading");}catch{}</script>
 </head>
 
@@ -611,6 +612,16 @@
           </button>
         </div>
 
+        <div class="featured-gallery" id="featuredGallery" hidden>
+          <div class="featured-gallery-heading">
+            <span>Featured moments</span>
+            <strong>School highlights</strong>
+          </div>
+          <div class="featured-gallery-window">
+            <div class="featured-gallery-track" id="featuredGalleryTrack"></div>
+          </div>
+        </div>
+
         <div class="gallery-grid" id="galleryGrid"></div>
 
         <div class="empty-state hidden" id="galleryEmptyState">
@@ -980,13 +991,6 @@
           Photos
         </button>
 
-        <button
-          class="admin-tab" role="tab" aria-selected="false" aria-controls="officialNoticePanel"
-          data-admin-tab="officialNoticePanel"
-        >
-          Notices
-        </button>
-
         <button class="admin-tab" role="tab" aria-selected="false" aria-controls="achievementAdminPanel" data-admin-tab="achievementAdminPanel">
           Awards
         </button>
@@ -1133,6 +1137,11 @@
               <button type="button" data-clear-upload="galleryImage">Remove photo</button>
             </div>
           </div>
+
+          <label class="gallery-featured-choice">
+            <input type="checkbox" id="galleryFeatured" />
+            <span><strong>Feature on home page</strong>Show this photo in the slow-moving highlights.</span>
+          </label>
 
           <p
             class="form-message success-message"
@@ -1420,8 +1429,8 @@
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
   <script src="js/cloud-data.js?v=20260718-2"></script>
   <script src="js/profile-loader.js"></script>
-  <script src="script.js?v=20260718-3"></script>
-  <script src="js/official-notices.js"></script>
+  <script src="script.js?v=20260718-4"></script>
+  <script src="js/official-notices.js?v=20260718-2"></script>
   <script src="js/document-scanner.js"></script>
   <script src="js/achievement-wall.js"></script>
 </body>
