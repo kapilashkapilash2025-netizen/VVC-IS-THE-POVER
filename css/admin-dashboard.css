@@ -1,0 +1,222 @@
+/* Responsive, touch-friendly administration workspace. */
+.admin-modal {
+  padding: clamp(6px, 2vw, 24px);
+}
+
+.admin-dashboard {
+  width: min(1180px, 100%);
+  max-height: 96dvh;
+  overflow: auto;
+  border: 1px solid rgba(98, 13, 31, 0.14);
+  padding: clamp(18px, 3vw, 34px);
+}
+
+.admin-dashboard-header {
+  gap: 16px;
+  padding-right: 42px;
+}
+
+.admin-heading h2 {
+  font-size: clamp(18px, 2.5vw, 28px);
+}
+
+.admin-heading p {
+  margin-top: 3px;
+}
+
+.admin-summary {
+  grid-template-columns: repeat(5, minmax(125px, 1fr));
+  gap: 1px;
+  overflow-x: auto;
+  scroll-snap-type: x proximity;
+}
+
+.admin-summary > div {
+  min-width: 125px;
+  padding: 14px 10px;
+  scroll-snap-align: start;
+}
+
+.admin-tabs {
+  position: sticky;
+  top: -1px;
+  z-index: 12;
+  overflow-x: auto;
+  overscroll-behavior-inline: contain;
+  scrollbar-width: thin;
+  box-shadow: 0 8px 20px rgba(54, 8, 17, 0.08);
+}
+
+.admin-tab {
+  min-height: 46px;
+  white-space: nowrap;
+}
+
+.admin-panel.active {
+  animation: admin-panel-in 180ms ease-out;
+}
+
+.admin-form,
+.official-admin-form,
+.achievement-admin-form {
+  max-width: 980px;
+  margin-inline: auto;
+}
+
+.admin-panel .panel-title {
+  max-width: 720px;
+}
+
+.admin-panel input,
+.admin-panel select,
+.admin-panel textarea,
+.admin-panel button {
+  font-size: max(16px, 0.72rem);
+}
+
+.admin-panel textarea {
+  resize: vertical;
+}
+
+.admin-panel input[type="file"] {
+  width: 100%;
+}
+
+.admin-panel .primary-button,
+.admin-panel .secondary-button,
+.admin-panel .scanner-launch-button {
+  min-height: 48px;
+}
+
+@keyframes admin-panel-in {
+  from { opacity: 0; transform: translateY(5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 760px) {
+  .admin-modal {
+    align-items: flex-end;
+    padding: 0;
+  }
+
+  .admin-dashboard {
+    width: 100%;
+    max-height: 100dvh;
+    min-height: 100dvh;
+    border: 0;
+    border-radius: 0;
+    padding: 18px 14px 96px;
+  }
+
+  .admin-dashboard .modal-close {
+    position: fixed;
+    top: max(10px, env(safe-area-inset-top));
+    right: 12px;
+    z-index: 30;
+  }
+
+  .admin-dashboard-header {
+    align-items: stretch;
+    padding: max(8px, env(safe-area-inset-top)) 46px 0 0;
+  }
+
+  .admin-heading {
+    align-items: flex-start;
+  }
+
+  .admin-heading img {
+    width: 52px;
+    height: 52px;
+    flex-basis: 52px;
+  }
+
+  .admin-heading span,
+  .admin-heading p {
+    font-size: 9px;
+  }
+
+  .logout-button {
+    width: 100%;
+    min-height: 44px;
+  }
+
+  .admin-summary {
+    grid-template-columns: repeat(5, 132px) !important;
+    margin: 16px -14px 0;
+    border-radius: 0;
+    padding-inline: 14px;
+  }
+
+  .admin-summary > div {
+    border-right: 1px solid rgba(255,255,255,.15) !important;
+    border-bottom: 0 !important;
+  }
+
+  .admin-tabs {
+    display: flex !important;
+    gap: 5px;
+    margin: 0 -14px 18px;
+    border-radius: 0;
+    padding: 8px 14px;
+  }
+
+  .admin-tab {
+    flex: 0 0 auto;
+    min-width: 92px;
+    padding-inline: 12px;
+  }
+
+  .panel-title {
+    margin-bottom: 14px;
+  }
+
+  .panel-title h3 {
+    font-size: 18px;
+  }
+
+  .form-row,
+  .official-form-grid,
+  .achievement-form-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .official-admin-form fieldset,
+  .achievement-admin-form {
+    border-radius: 12px;
+    padding: 14px;
+  }
+
+  .achievement-form-actions,
+  .official-form-actions {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .achievement-form-actions button,
+  .official-form-actions button,
+  .admin-form > .primary-button {
+    width: 100%;
+  }
+
+  .achievement-admin-item,
+  .achievement-moderation-item,
+  .admin-list-item {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .achievement-admin-actions {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .form-group input[type="file"]::file-selector-button {
+    display: block;
+    width: 100%;
+    margin: 0 0 8px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .admin-panel.active { animation: none; }
+}

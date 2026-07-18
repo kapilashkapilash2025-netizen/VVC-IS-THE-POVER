@@ -42,6 +42,7 @@
   <link rel="stylesheet" href="css/document-scanner.css" />
   <link rel="stylesheet" href="css/achievement-wall.css" />
   <link rel="stylesheet" href="css/experience-polish.css" />
+  <link rel="stylesheet" href="css/admin-dashboard.css" />
   <script>try{if(sessionStorage.getItem("vvcOfficialProfileLoaded")==="1")document.documentElement.classList.remove("profile-loading");}catch{}</script>
 </head>
 
@@ -927,8 +928,8 @@
 
           <div>
             <span>VVC Administration</span>
-            <h2>Content Management Dashboard</h2>
-            <p>Manage public school information.</p>
+            <h2>Admin Dashboard</h2>
+            <p>Post and manage school content.</p>
           </div>
         </div>
 
@@ -964,37 +965,37 @@
         </div>
       </div>
 
-      <div class="admin-tabs">
+      <div class="admin-tabs" role="tablist" aria-label="Admin sections">
         <button
-          class="admin-tab active"
+          class="admin-tab active" role="tab" aria-selected="true" aria-controls="addUpdatePanel"
           data-admin-tab="addUpdatePanel"
         >
-          New Update
+          Updates
         </button>
 
         <button
-          class="admin-tab"
+          class="admin-tab" role="tab" aria-selected="false" aria-controls="addGalleryPanel"
           data-admin-tab="addGalleryPanel"
         >
-          Gallery Upload
+          Photos
         </button>
 
         <button
-          class="admin-tab"
+          class="admin-tab" role="tab" aria-selected="false" aria-controls="officialNoticePanel"
           data-admin-tab="officialNoticePanel"
         >
-          Official Notice
+          Notices
         </button>
 
-        <button class="admin-tab" data-admin-tab="achievementAdminPanel">
-          Achievements
+        <button class="admin-tab" role="tab" aria-selected="false" aria-controls="achievementAdminPanel" data-admin-tab="achievementAdminPanel">
+          Awards
         </button>
 
         <button
-          class="admin-tab"
+          class="admin-tab" role="tab" aria-selected="false" aria-controls="manageContentPanel"
           data-admin-tab="manageContentPanel"
         >
-          Manage Content
+          Manage
         </button>
       </div>
 
@@ -1419,7 +1420,7 @@
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
   <script src="js/cloud-data.js?v=20260718-2"></script>
   <script src="js/profile-loader.js"></script>
-  <script src="script.js?v=20260718-2"></script>
+  <script src="script.js?v=20260718-3"></script>
   <script src="js/official-notices.js"></script>
   <script src="js/document-scanner.js"></script>
   <script src="js/achievement-wall.js"></script>
