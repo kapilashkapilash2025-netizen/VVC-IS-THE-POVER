@@ -1,0 +1,35 @@
+/* Visitor-controlled browser notification subscription. */
+.notification-button {
+  display: inline-flex;
+  min-height: 42px;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  color: #4a3000;
+  background: linear-gradient(135deg, #ffe893, var(--gold-400));
+  border: 1px solid rgba(117, 75, 0, .18);
+  border-radius: 10px;
+  padding: 0 14px;
+  font-size: 11px;
+  font-weight: 900;
+  box-shadow: 0 8px 20px rgba(126, 86, 0, .16);
+  transition: transform .18s ease, box-shadow .18s ease, background .18s ease;
+}
+
+.notification-button:hover { transform: translateY(-2px); box-shadow: 0 12px 26px rgba(126, 86, 0, .24); }
+.notification-button.is-subscribed { color: #fff; background: linear-gradient(135deg, var(--maroon-600), var(--maroon-800)); }
+.notification-button:focus-visible { outline: 3px solid var(--gold-500); outline-offset: 3px; }
+
+.visually-hidden {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  overflow: hidden !important;
+  clip: rect(0 0 0 0) !important;
+  clip-path: inset(50%) !important;
+  white-space: nowrap !important;
+}
+
+@media (max-width: 1020px) {
+  .notification-button { width: 100%; margin-top: 5px; }
+}
