@@ -877,6 +877,8 @@ loginForm.addEventListener("submit", async (event) => {
       loginMessage.textContent = "New password saved successfully.";
     } else {
       await window.VVCCloud.signInWithPassword(email, password);
+      adminLoggedIn = await window.VVCCloud.isAdmin();
+      if (!adminLoggedIn) throw new Error("The signed-in account is not authorized for VVC administration.");
       loginMessage.textContent = "Signed in successfully.";
     }
     closeModal(loginModal);
@@ -937,6 +939,17 @@ document.addEventListener("vvc:auth", (event) => {
   }
 });
 
+// Recover an already-active Supabase session if its initial auth event fired
+// before this page script finished registering the listener above.
+window.VVCCloud?.session()
+  .then((currentSession) => {
+    const email = currentSession?.user?.email?.toLowerCase();
+    adminLoggedIn = email === window.VVCCloud.adminEmail;
+  })
+  .catch(() => {
+    adminLoggedIn = false;
+  });
+
 document.addEventListener("vvc:cloud-sync", (event) => {
   if (event.detail?.type === "updates") { schoolUpdates = event.detail.records; renderUpdates(); renderAdminContent(); }
   if (event.detail?.type === "gallery") { schoolGallery = event.detail.records; renderGallery(); renderAdminContent(); }
@@ -949,6 +962,9 @@ document.addEventListener("vvc:cloud-status", (event) => showToast(event.detail?
 updateForm.addEventListener("submit", async (event) => {
   event.preventDefault();
 
+  if (!adminLoggedIn && window.VVCCloud) {
+    adminLoggedIn = await window.VVCCloud.isAdmin();
+  }
   if (!adminLoggedIn) {
     closeModal(adminModal);
     openModal(loginModal);
@@ -1037,6 +1053,9 @@ updateForm.addEventListener("submit", async (event) => {
 galleryForm.addEventListener("submit", async (event) => {
   event.preventDefault();
 
+  if (!adminLoggedIn && window.VVCCloud) {
+    adminLoggedIn = await window.VVCCloud.isAdmin();
+  }
   if (!adminLoggedIn) {
     closeModal(adminModal);
     openModal(loginModal);
