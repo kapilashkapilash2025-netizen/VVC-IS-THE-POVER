@@ -45,6 +45,7 @@
   <link rel="stylesheet" href="css/admin-dashboard.css" />
   <link rel="stylesheet" href="css/featured-gallery.css?v=20260718-2" />
   <link rel="stylesheet" href="css/about-emblem.css" />
+  <link rel="stylesheet" href="css/notifications.css?v=20260718-1" />
   <script>try{if(sessionStorage.getItem("vvcOfficialProfileLoaded")==="1")document.documentElement.classList.remove("profile-loading");}catch{}</script>
 </head>
 
@@ -126,6 +127,11 @@
         <a href="#gallery" class="navigation-link">Gallery</a>
         <a href="#academics" class="navigation-link">Academics</a>
         <a href="#contact" class="navigation-link">Contact</a>
+
+        <button class="notification-button" id="notificationSubscribeButton" type="button" aria-describedby="notificationSubscriptionStatus">
+          <span aria-hidden="true">🔔</span>
+          <span id="notificationButtonLabel">Subscribe</span>
+        </button>
 
         <button class="admin-button" id="adminLoginButton">
           <span>🔐</span>
@@ -1426,6 +1432,7 @@
 
   <!-- Toast -->
   <div class="toast-message" id="toastMessage" role="status" aria-live="polite"></div>
+  <span class="visually-hidden" id="notificationSubscriptionStatus" role="status" aria-live="polite">Notifications are not subscribed.</span>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
   <script src="js/cloud-data.js?v=20260718-2"></script>
@@ -1434,5 +1441,6 @@
   <script src="js/official-notices.js?v=20260718-2"></script>
   <script src="js/document-scanner.js"></script>
   <script src="js/achievement-wall.js"></script>
+  <script src="js/notification-manager.js?v=20260718-1"></script>
 </body>
 </html>
