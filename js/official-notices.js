@@ -2,7 +2,7 @@
 
 /** Official notices use Supabase when available, with a device-local fallback. */
 const OFFICIAL_NOTICE_KEY = "vvcOfficialPrincipalNoticesV1";
-const SCHOOL_LOGO = "./assets/school-logo.png";
+const SCHOOL_LOGO = "./assets/school-logo-optimized.jpg";
 const MAX_UPLOAD_BYTES = 2.5 * 1024 * 1024;
 let pendingNotice = null;
 let editingNoticeId = null;

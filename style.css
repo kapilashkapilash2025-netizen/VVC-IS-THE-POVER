@@ -367,7 +367,7 @@ button {
   position: absolute;
   inset: 0;
   background:
-    url("./assets/school-logo.png") 82% center / min(38vw, 520px) auto no-repeat,
+    url("./assets/school-logo-optimized.jpg") 82% center / min(38vw, 520px) auto no-repeat,
     radial-gradient(circle at 78% 45%, rgba(255, 255, 255, 0.95), rgba(255, 245, 207, 0.82) 28%, transparent 29%),
     linear-gradient(135deg, var(--maroon-800), var(--maroon-950));
   filter: saturate(0.95);
@@ -2783,7 +2783,7 @@ a.contact-item:hover {
 @media (max-width: 820px) {
   .hero-image {
     background:
-      url("./assets/school-logo.png") center 18% / min(72vw, 380px) auto no-repeat,
+      url("./assets/school-logo-optimized.jpg") center 18% / min(72vw, 380px) auto no-repeat,
       radial-gradient(circle at 50% 28%, rgba(255, 255, 255, 0.92), rgba(255, 245, 207, 0.75) 32%, transparent 33%),
       linear-gradient(135deg, var(--maroon-800), var(--maroon-950));
     opacity: 0.32;

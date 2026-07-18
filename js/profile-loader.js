@@ -34,19 +34,17 @@
   const messageTimer = window.setInterval(() => {
     message.classList.add("profile-loader-message-change");
     window.setTimeout(() => { messageIndex = (messageIndex + 1) % messages.length; message.textContent = messages[messageIndex]; message.classList.remove("profile-loader-message-change"); }, 180);
-  }, 700);
+  }, 900);
 
-  const imageTasks = [...new Set([...document.images].map((image) => image.currentSrc || image.src).filter(Boolean))].map((source) => {
-    return new Promise((resolve) => { const preload = new Image(); preload.onload = resolve; preload.onerror = resolve; preload.src = source; if (preload.complete) resolve(); });
-  });
+  // Only the explicitly preloaded crest is critical. Loading every page image here
+  // defeated native lazy-loading and retained duplicate Image objects in memory.
   const fontsReady = document.fonts?.ready ? document.fonts.ready.catch(() => undefined) : Promise.resolve();
-  const windowReady = document.readyState === "complete" ? Promise.resolve() : new Promise((resolve) => window.addEventListener("load", resolve, { once: true }));
-  const resourcesReady = Promise.allSettled([...imageTasks, fontsReady, windowReady]);
-  const minimumDisplay = new Promise((resolve) => window.setTimeout(resolve, 2500));
-  const maximumWait = new Promise((resolve) => window.setTimeout(resolve, 7000));
+  const resourcesReady = Promise.allSettled([fontsReady]);
+  const minimumDisplay = new Promise((resolve) => window.setTimeout(resolve, 650));
+  const maximumWait = new Promise((resolve) => window.setTimeout(resolve, 2500));
   let displayedProgress = 8;
   progress.style.width = `${displayedProgress}%`;
-  const progressTimer = window.setInterval(() => { displayedProgress = Math.min(88, displayedProgress + Math.max(1, Math.round((90 - displayedProgress) / 7))); progress.style.width = `${displayedProgress}%`; }, 180);
+  const progressTimer = window.setInterval(() => { displayedProgress = Math.min(90, displayedProgress + Math.max(2, Math.round((92 - displayedProgress) / 5))); progress.style.width = `${displayedProgress}%`; }, 120);
 
   Promise.race([Promise.all([resourcesReady, minimumDisplay]), maximumWait]).then(() => {
     window.clearInterval(progressTimer); window.clearInterval(messageTimer); progress.style.width = "100%"; message.textContent = messages[messages.length - 1];
@@ -55,6 +53,6 @@
       loader.classList.add("loaded"); root.classList.remove("profile-loading");
       pageContent.forEach((node) => { node.inert = false; node.removeAttribute("aria-hidden"); });
       window.setTimeout(() => loader.remove(), 800);
-    }, 420);
+    }, 180);
   });
 })();

@@ -69,8 +69,8 @@
     const body = additionalCount > 0 ? `${recordTitle} — and ${additionalCount} more.` : recordTitle;
     const options = {
       body,
-      icon: "assets/school-logo.png",
-      badge: "assets/school-logo.png",
+      icon: "assets/school-logo-optimized.jpg",
+      badge: "assets/school-logo-optimized.jpg",
       tag: `vvc-${type}-${record?.id || Date.now()}`,
       data: { url: CONTENT_PATHS[type] || "./" }
     };
@@ -125,6 +125,5 @@
     enabled = false;
     localStorage.setItem(SUBSCRIPTION_KEY, "false");
   }
-  ensureServiceWorker().catch(() => null);
   updateButton();
 })();

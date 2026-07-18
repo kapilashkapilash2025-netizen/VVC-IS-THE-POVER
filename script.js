@@ -8,7 +8,7 @@ const STORAGE_KEYS = {
 
 const DEFAULT_SCHOOL_IMAGE =
   "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==";
-const SCHOOL_LOGO_IMAGE = "./assets/school-logo.png";
+const SCHOOL_LOGO_IMAGE = "./assets/school-logo-optimized.jpg";
 
 const defaultUpdates = [
   {
@@ -106,6 +106,7 @@ let adminLoggedIn = false;
 let passwordRecoveryMode = false;
 let toastTimer = null;
 let featuredGalleryRotationTimer = null;
+let scannerAssetsPromise = null;
 
 const updatesGrid = document.getElementById("updatesGrid");
 const galleryGrid = document.getElementById("galleryGrid");
@@ -130,6 +131,25 @@ const updateForm = document.getElementById("updateForm");
 const galleryForm = document.getElementById("galleryForm");
 
 const loginMessage = document.getElementById("loginMessage");
+
+function loadScannerAssets() {
+  if (scannerAssetsPromise) return scannerAssetsPromise;
+  scannerAssetsPromise = new Promise((resolve, reject) => {
+    if (!document.querySelector('link[data-scanner-styles]')) {
+      const styles = document.createElement("link");
+      styles.rel = "stylesheet";
+      styles.href = "css/document-scanner.css?v=20260718-2";
+      styles.dataset.scannerStyles = "true";
+      document.head.append(styles);
+    }
+    const script = document.createElement("script");
+    script.src = "js/document-scanner.js?v=20260718-2";
+    script.onload = resolve;
+    script.onerror = () => reject(new Error("Document scanner could not be loaded."));
+    document.body.append(script);
+  });
+  return scannerAssetsPromise;
+}
 
 const updateFormMessage =
   document.getElementById("updateFormMessage");
@@ -936,6 +956,7 @@ mainNavigation
 document
   .getElementById("adminLoginButton")
   .addEventListener("click", () => {
+    loadScannerAssets().catch((error) => showToast(error.message));
     mainNavigation.classList.remove("active");
 
     if (adminLoggedIn) {
@@ -1410,6 +1431,16 @@ document.addEventListener("keydown", (event) => {
     showGalleryPreview(
       document.activeElement.dataset.galleryId
     );
+  }
+});
+
+// Stop the rotating showcase while the tab is hidden to avoid background work.
+document.addEventListener("visibilitychange", () => {
+  if (document.hidden) {
+    window.clearInterval(featuredGalleryRotationTimer);
+    featuredGalleryRotationTimer = null;
+  } else {
+    renderFeaturedGallery();
   }
 });
 
