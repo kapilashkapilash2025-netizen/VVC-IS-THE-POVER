@@ -31,7 +31,7 @@ No package install, framework, external font, remote image, or third-party scrip
 
 ## Content safety
 
-The portal follows the supplied Vavuniya Vipulanantha College reference. Administration uses a Supabase one-time email sign-in link, Row Level Security and an explicit administrator allowlist. Browser code contains only the public Supabase publishable key; backend secret keys must never be committed.
+The portal follows the supplied Vavuniya Vipulanantha College reference. Administration uses Supabase password authentication, Row Level Security and an explicit administrator allowlist. Browser code contains only the public Supabase publishable key; backend secret keys must never be committed.
 
 ## Shared realtime backend
 
@@ -47,8 +47,18 @@ The scanner architecture is split into `js/document-scanner.js` and `css/documen
 
 ## Achievement Celebration Wall
 
-Open `achievements.html` to view published student achievements, filters, sorting, reactions and approved congratulation messages. Administrators can create and moderate posts through the existing dashboard's **Achievements** tab. Achievement data and optimized images are device-local in `localStorage`; shared public counts and cross-device moderation require a real backend such as Firebase.
+Open `achievements.html` to view published student achievements, filters, sorting, reactions and approved congratulation messages. Administrators can create and moderate posts through the dashboard's **Awards** tab. Published achievements, reactions and moderated messages synchronize through Supabase; per-browser reaction identity remains a frontend limitation.
 
 ## Official Principal announcements
 
-Sign in through the existing Admin button and select **Official Notice**. Every notice must be previewed and finally confirmed before it is stored. Published active notices appear on the home page and `notices.html`; expired and archived notices remain manageable in the admin dashboard but are hidden publicly.
+Sign in through the Admin button, open **Updates**, and expand **Principal signed notice**. Every notice must be previewed and finally confirmed before it is stored. Published active notices appear on the home page and `notices.html`; expired and archived notices remain manageable in the admin dashboard but are hidden publicly.
+
+## Project reporting
+
+- [Full project review](FULL-PROJECT-REVIEW.md)
+- [Release register](RELEASES.md)
+- [Performance optimization report](PERFORMANCE-OPTIMIZATION-REPORT.md)
+- [Repository audit](AUDIT.md)
+- [Implementation report](REPORT.md)
+
+Every material change should be delivered through a feature branch and Pull Request using `.github/pull_request_template.md`. The PR must record the release month/year, improvements, tests, limitations, rollback notes and questions requiring school approval.
