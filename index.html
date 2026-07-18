@@ -862,15 +862,14 @@
           />
         </div>
 
-        <div class="form-group" id="legacyPasswordField" hidden>
+        <div class="form-group" id="adminPasswordField">
           <label for="adminPassword">Password</label>
 
           <div class="password-field">
             <input
               type="password"
               id="adminPassword"
-              disabled
-              placeholder="Enter password"
+              placeholder="Enter your secure password"
               autocomplete="current-password"
               required
             />
@@ -880,7 +879,7 @@
               id="togglePasswordButton"
               aria-label="Show password"
             >
-              👁
+              Show
             </button>
           </div>
         </div>
@@ -888,7 +887,11 @@
         <p class="form-message error-message" id="loginMessage"></p>
 
         <button type="submit" class="primary-button full-button">
-          Email Secure Sign-In Link
+          Sign In
+        </button>
+
+        <button type="button" class="secondary-button full-button" id="resetAdminPasswordButton">
+          Set / Reset Password
         </button>
       </form>
 
