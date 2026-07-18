@@ -32,8 +32,8 @@ drop policy if exists "Public reads VVC content" on public.vvc_content;
 create policy "Public reads VVC content" on public.vvc_content for select using (true);
 drop policy if exists "VVC admin writes content" on public.vvc_content;
 create policy "VVC admin writes content" on public.vvc_content for all to authenticated
-  using ((auth.jwt() ->> 'email') = 'kapilashkapilash25@gmail.com')
-  with check ((auth.jwt() ->> 'email') = 'kapilashkapilash25@gmail.com');
+  using ((auth.jwt() ->> 'email') = 'kapilashkapilash2025@gmail.com')
+  with check ((auth.jwt() ->> 'email') = 'kapilashkapilash2025@gmail.com');
 
 drop policy if exists "Public reads reactions" on public.vvc_reactions;
 create policy "Public reads reactions" on public.vvc_reactions for select using (true);
@@ -46,17 +46,17 @@ create policy "Visitors remove reactions" on public.vvc_reactions for delete to 
 
 drop policy if exists "Public reads approved messages" on public.vvc_messages;
 create policy "Public reads approved messages" on public.vvc_messages for select
-  using (status = 'approved' or (auth.jwt() ->> 'email') = 'kapilashkapilash25@gmail.com');
+  using (status = 'approved' or (auth.jwt() ->> 'email') = 'kapilashkapilash2025@gmail.com');
 drop policy if exists "Visitors submit pending messages" on public.vvc_messages;
 create policy "Visitors submit pending messages" on public.vvc_messages for insert to anon, authenticated
   with check (status = 'pending');
 drop policy if exists "VVC admin moderates messages" on public.vvc_messages;
 create policy "VVC admin moderates messages" on public.vvc_messages for update to authenticated
-  using ((auth.jwt() ->> 'email') = 'kapilashkapilash25@gmail.com')
-  with check ((auth.jwt() ->> 'email') = 'kapilashkapilash25@gmail.com');
+  using ((auth.jwt() ->> 'email') = 'kapilashkapilash2025@gmail.com')
+  with check ((auth.jwt() ->> 'email') = 'kapilashkapilash2025@gmail.com');
 drop policy if exists "VVC admin deletes messages" on public.vvc_messages;
 create policy "VVC admin deletes messages" on public.vvc_messages for delete to authenticated
-  using ((auth.jwt() ->> 'email') = 'kapilashkapilash25@gmail.com');
+  using ((auth.jwt() ->> 'email') = 'kapilashkapilash2025@gmail.com');
 
 insert into storage.buckets (id, name, public, file_size_limit, allowed_mime_types)
 values ('vvc-media','vvc-media',true,10485760,array['image/jpeg','image/png','image/webp','application/pdf'])
@@ -67,13 +67,13 @@ drop policy if exists "Public reads VVC media" on storage.objects;
 create policy "Public reads VVC media" on storage.objects for select using (bucket_id = 'vvc-media');
 drop policy if exists "VVC admin uploads media" on storage.objects;
 create policy "VVC admin uploads media" on storage.objects for insert to authenticated
-  with check (bucket_id = 'vvc-media' and (auth.jwt() ->> 'email') = 'kapilashkapilash25@gmail.com');
+  with check (bucket_id = 'vvc-media' and (auth.jwt() ->> 'email') = 'kapilashkapilash2025@gmail.com');
 drop policy if exists "VVC admin updates media" on storage.objects;
 create policy "VVC admin updates media" on storage.objects for update to authenticated
-  using (bucket_id = 'vvc-media' and (auth.jwt() ->> 'email') = 'kapilashkapilash25@gmail.com');
+  using (bucket_id = 'vvc-media' and (auth.jwt() ->> 'email') = 'kapilashkapilash2025@gmail.com');
 drop policy if exists "VVC admin deletes media" on storage.objects;
 create policy "VVC admin deletes media" on storage.objects for delete to authenticated
-  using (bucket_id = 'vvc-media' and (auth.jwt() ->> 'email') = 'kapilashkapilash25@gmail.com');
+  using (bucket_id = 'vvc-media' and (auth.jwt() ->> 'email') = 'kapilashkapilash2025@gmail.com');
 
 do $$ begin
   alter publication supabase_realtime add table public.vvc_content;
