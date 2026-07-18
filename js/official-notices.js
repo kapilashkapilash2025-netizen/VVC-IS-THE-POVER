@@ -232,7 +232,7 @@ function fillForm(notice) {
   const documentInput = form.elements.namedItem("scannedDocumentId");
   if (documentInput) documentInput.value = notice.scannedDocumentId || "";
   select("#officialFormMode").textContent = "Editing official notice"; select("#cancelOfficialEdit").hidden = false;
-  select('[data-admin-tab="officialNoticePanel"]')?.click(); form.scrollIntoView({ block: "start" });
+  const quickSection = select("#officialNoticeQuickSection"); if (quickSection) quickSection.open = true; form.scrollIntoView({ block: "start" });
 }
 
 function resetOfficialForm() {
@@ -286,7 +286,7 @@ document.addEventListener("click", (event) => {
 });
 
 select("#officialCategoryFilter")?.addEventListener("change", renderPublicNotices);
-select('[data-admin-tab="officialNoticePanel"]')?.addEventListener("click", renderAdminNotices);
+select("#officialNoticeQuickSection")?.addEventListener("toggle", (event) => { if (event.target.open) renderAdminNotices(); });
 document.addEventListener("keydown", (event) => { if (event.key === "Escape") closePreview(); });
 document.addEventListener("vvc:cloud-sync", (event) => { if (event.detail?.type === "notices") { renderPublicNotices(); renderAdminNotices(); } });
 

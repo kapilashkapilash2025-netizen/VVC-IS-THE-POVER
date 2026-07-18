@@ -384,6 +384,7 @@ function renderUpdates() {
 
 function renderGallery() {
   galleryGrid.innerHTML = "";
+  renderFeaturedGallery();
 
   if (schoolGallery.length === 0) {
     galleryEmptyState.classList.remove("hidden");
@@ -442,6 +443,44 @@ function renderGallery() {
       applyAutomaticLayout();
     }
   });
+}
+
+function renderFeaturedGallery() {
+  const showcase = document.getElementById("featuredGallery");
+  const track = document.getElementById("featuredGalleryTrack");
+  if (!showcase || !track) return;
+
+  const selected = schoolGallery.filter((item) => item.featured);
+  const highlights = (selected.length ? selected : schoolGallery).slice(0, 6);
+  track.replaceChildren();
+  showcase.hidden = highlights.length === 0;
+  if (!highlights.length) return;
+
+  const displayItems = highlights.length > 1 ? [...highlights, ...highlights] : highlights;
+  displayItems.forEach((item, index) => {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "featured-gallery-card";
+    button.dataset.galleryId = item.id;
+    button.setAttribute("aria-label", `View ${item.title}`);
+    if (index >= highlights.length) {
+      button.setAttribute("aria-hidden", "true");
+      button.tabIndex = -1;
+    }
+
+    const image = document.createElement("img");
+    image.src = item.image;
+    image.alt = index < highlights.length ? item.title : "";
+    image.loading = "lazy";
+    image.onerror = () => { image.src = DEFAULT_SCHOOL_IMAGE; };
+
+    const caption = document.createElement("span");
+    caption.textContent = item.title;
+    button.append(image, caption);
+    track.append(button);
+  });
+
+  track.classList.toggle("is-static", highlights.length === 1);
 }
 
 function renderAdminContent() {
@@ -515,6 +554,15 @@ function renderAdminContent() {
               <strong>${escapeHTML(galleryItem.title)}</strong>
               <span>${escapeHTML(galleryItem.category)}</span>
             </div>
+
+            <button
+              type="button"
+              class="feature-button${galleryItem.featured ? " active" : ""}"
+              data-feature-gallery="${escapeHTML(galleryItem.id)}"
+              aria-pressed="${galleryItem.featured ? "true" : "false"}"
+            >
+              ${galleryItem.featured ? "Featured" : "Feature"}
+            </button>
 
             <button
               type="button"
@@ -696,6 +744,31 @@ function activateAdminTab(button) {
   if (button.dataset.adminTab === "manageContentPanel") {
     renderAdminContent();
   }
+}
+
+function integrateOfficialNoticeAdmin() {
+  const updatePanel = document.getElementById("addUpdatePanel");
+  const noticePanel = document.getElementById("officialNoticePanel");
+  document.querySelector('[data-admin-tab="officialNoticePanel"]')?.remove();
+  if (!updatePanel || !noticePanel) return;
+
+  const details = document.createElement("details");
+  details.id = "officialNoticeQuickSection";
+  details.className = "official-notice-quick-section";
+
+  const summary = document.createElement("summary");
+  const title = document.createElement("strong");
+  title.textContent = "Principal signed notice";
+  const help = document.createElement("span");
+  help.textContent = "Open, complete and publish an official notice";
+  summary.append(title, help);
+
+  const content = document.createElement("div");
+  content.className = "official-notice-quick-content";
+  while (noticePanel.firstChild) content.append(noticePanel.firstChild);
+  details.append(summary, content);
+  updatePanel.append(details);
+  noticePanel.remove();
 }
 
 function setDefaultDate() {
@@ -1101,7 +1174,8 @@ galleryForm.addEventListener("submit", async (event) => {
     id: createId("vvc-gallery"),
     title,
     category,
-    image
+    image,
+    featured: document.getElementById("galleryFeatured").checked
   };
 
   schoolGallery.unshift(galleryItem);
@@ -1278,6 +1352,18 @@ document.addEventListener("click", (event) => {
       showToast("Gallery photo deleted.");
     }
   }
+
+  const featureGalleryButton = event.target.closest("[data-feature-gallery]");
+  if (featureGalleryButton) {
+    const item = schoolGallery.find((galleryPhoto) => galleryPhoto.id === featureGalleryButton.dataset.featureGallery);
+    if (item) {
+      item.featured = !item.featured;
+      saveArray(STORAGE_KEYS.gallery, schoolGallery);
+      renderGallery();
+      renderAdminContent();
+      showToast(item.featured ? "Photo added to home highlights." : "Photo removed from home highlights.");
+    }
+  }
 });
 
 /* Keyboard accessibility */
@@ -1347,6 +1433,7 @@ function initializeWebsite() {
   updateLiveDate();
   updateSchoolYears();
 
+  integrateOfficialNoticeAdmin();
   renderUpdates();
   renderGallery();
   renderAdminContent();
