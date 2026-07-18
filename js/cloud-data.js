@@ -18,6 +18,12 @@
   const dataUrlBlob = async (value) => fetch(value).then((response) => response.blob());
   const emit = (type, records) => document.dispatchEvent(new CustomEvent("vvc:cloud-sync", { detail: { type, records } }));
   const notify = (message) => document.dispatchEvent(new CustomEvent("vvc:cloud-status", { detail: { message } }));
+  function preserveForMigration(type, records) {
+    let backup = {};
+    try { backup = JSON.parse(localStorage.getItem(migrationBackupKey) || "{}"); } catch { backup = {}; }
+    backup[type] = records;
+    try { localStorage.setItem(migrationBackupKey, JSON.stringify(backup)); } catch { /* The regular local cache still remains available. */ }
+  }
 
   async function session() { return (await client.auth.getSession()).data.session; }
   async function isAdmin() { return (await session())?.user?.email?.toLowerCase() === ADMIN_EMAIL; }
@@ -85,7 +91,7 @@
   }
 
   async function putCollectionNow(type, records) {
-    if (!(await isAdmin())) return;
+    if (!(await isAdmin())) { preserveForMigration(type, records); notify("Saved on this device. Complete secure admin sign-in to synchronize it to every phone."); return; }
     const cloudRecords = [];
     for (const record of records) cloudRecords.push(await cloudify(record, type, record.id));
     if (cloudRecords.length) {
