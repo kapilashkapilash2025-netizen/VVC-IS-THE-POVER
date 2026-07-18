@@ -168,6 +168,13 @@ function loadArray(key, fallback) {
 function saveArray(key, value) {
   try {
     localStorage.setItem(key, JSON.stringify(value));
+    const cloudTypes = {
+      [STORAGE_KEYS.updates]: "updates",
+      [STORAGE_KEYS.gallery]: "gallery"
+    };
+    if (cloudTypes[key] && window.VVCCloud) {
+      window.VVCCloud.putCollection(cloudTypes[key], value);
+    }
     return true;
   } catch (error) {
     console.error(`Unable to save ${key}:`, error);
@@ -839,7 +846,7 @@ document
 
 document
   .getElementById("togglePasswordButton")
-  .addEventListener("click", () => {
+  ?.addEventListener("click", () => {
     const passwordInput =
       document.getElementById("adminPassword");
 
@@ -849,43 +856,52 @@ document
         : "password";
   });
 
-loginForm.addEventListener("submit", (event) => {
+loginForm.addEventListener("submit", async (event) => {
   event.preventDefault();
 
-  const username = document
+  const email = document
     .getElementById("adminUsername")
     .value.trim();
-
-  const password =
-    document.getElementById("adminPassword").value;
-
-  if (
-    username === "admin" &&
-    password === "vvc1958"
-  ) {
-    adminLoggedIn = true;
-
-    loginForm.reset();
-    loginMessage.textContent = "";
-
-    closeModal(loginModal);
-    renderAdminContent();
-    openModal(adminModal);
-
-    showToast("Administrator login successful.");
-  } else {
-    loginMessage.textContent =
-      "Incorrect username or password.";
+  const submitButton = loginForm.querySelector('button[type="submit"]');
+  submitButton.disabled = true;
+  submitButton.textContent = "Sending secure link…";
+  try {
+    if (!window.VVCCloud) throw new Error("Cloud sign-in is temporarily unavailable.");
+    await window.VVCCloud.sendMagicLink(email);
+    loginMessage.textContent = "Secure sign-in link sent. Open it from the authorized email inbox.";
+  } catch (error) {
+    loginMessage.textContent = error.message;
+  } finally {
+    submitButton.disabled = false;
+    submitButton.textContent = "Email Secure Sign-In Link";
   }
 });
 
 document
   .getElementById("logoutButton")
-  .addEventListener("click", () => {
+  .addEventListener("click", async () => {
     adminLoggedIn = false;
+    if (window.VVCCloud) await window.VVCCloud.signOut();
     closeModal(adminModal);
     showToast("Administrator signed out.");
   });
+
+document.addEventListener("vvc:auth", (event) => {
+  const email = event.detail?.session?.user?.email?.toLowerCase();
+  adminLoggedIn = email === window.VVCCloud?.adminEmail;
+  if (adminLoggedIn) {
+    closeModal(loginModal);
+    renderAdminContent();
+    showToast("Secure cloud administration is active.");
+  }
+});
+
+document.addEventListener("vvc:cloud-sync", (event) => {
+  if (event.detail?.type === "updates") { schoolUpdates = event.detail.records; renderUpdates(); renderAdminContent(); }
+  if (event.detail?.type === "gallery") { schoolGallery = event.detail.records; renderGallery(); renderAdminContent(); }
+});
+
+document.addEventListener("vvc:cloud-status", (event) => showToast(event.detail?.message || "Cloud status updated."));
 
 /* Add update */
 

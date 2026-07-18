@@ -851,24 +851,25 @@
 
       <form id="loginForm">
         <div class="form-group">
-          <label for="adminUsername">Username</label>
+          <label for="adminUsername">Authorized admin email</label>
 
           <input
-            type="text"
+            type="email"
             id="adminUsername"
-            placeholder="Enter username"
+            placeholder="Enter the authorized school email"
             autocomplete="username"
             required
           />
         </div>
 
-        <div class="form-group">
+        <div class="form-group" id="legacyPasswordField" hidden>
           <label for="adminPassword">Password</label>
 
           <div class="password-field">
             <input
               type="password"
               id="adminPassword"
+              disabled
               placeholder="Enter password"
               autocomplete="current-password"
               required
@@ -887,11 +888,11 @@
         <p class="form-message error-message" id="loginMessage"></p>
 
         <button type="submit" class="primary-button full-button">
-          Sign In to Dashboard
+          Email Secure Sign-In Link
         </button>
       </form>
 
-      <div class="demo-credentials">
+      <div class="demo-credentials" hidden>
         <span>Development login</span>
         <p>
           Username: <strong>admin</strong> ·
@@ -1412,6 +1413,8 @@
   <!-- Toast -->
   <div class="toast-message" id="toastMessage" role="status" aria-live="polite"></div>
 
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+  <script src="js/cloud-data.js"></script>
   <script src="js/profile-loader.js"></script>
   <script src="script.js"></script>
   <script src="js/official-notices.js"></script>

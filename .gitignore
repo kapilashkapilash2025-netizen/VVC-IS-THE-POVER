@@ -1,0 +1,6 @@
+# Never commit backend secrets or local environment overrides.
+.env
+.env.*
+!.env.example
+*.pem
+*.key

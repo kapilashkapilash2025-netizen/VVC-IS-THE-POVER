@@ -1,6 +1,6 @@
 "use strict";
 
-/** Official notices are device-local in this frontend-only build. */
+/** Official notices use Supabase when available, with a device-local fallback. */
 const OFFICIAL_NOTICE_KEY = "vvcOfficialPrincipalNoticesV1";
 const SCHOOL_LOGO = "./assets/school-logo.png";
 const MAX_UPLOAD_BYTES = 2.5 * 1024 * 1024;
@@ -30,6 +30,7 @@ function readNotices() {
 function writeNotices(notices) {
   try {
     localStorage.setItem(OFFICIAL_NOTICE_KEY, JSON.stringify(notices));
+    if (window.VVCCloud) window.VVCCloud.putCollection("notices", notices);
     return true;
   } catch {
     window.alert("Device storage is full. Remove older image-heavy notices and try again.");
@@ -200,7 +201,7 @@ async function collectFormNotice(form) {
     principalName: clean(data.get("principalName"), 120), designation: clean(data.get("designation"), 120), publicationDate: clean(data.get("publicationDate"), 10), expiryDate: clean(data.get("expiryDate"), 10),
     priority: ["normal", "high", "urgent"].includes(data.get("priority")) ? data.get("priority") : "normal", pinned: data.get("pinned") === "on", status: existing?.status === "archived" ? "published" : (existing?.status || "published"),
     signatureImage: signatureImage || existing?.signatureImage || "", sealImage: sealImage || existing?.sealImage || "", attachmentImage: attachmentImage || existing?.attachmentImage || "",
-    scannedDocumentId: clean(data.get("scannedDocumentId"), 100) || existing?.scannedDocumentId || "", scannedDocumentTitle: existing?.scannedDocumentTitle || "Scanned official document", updatedAt: new Date().toISOString(),
+    scannedDocumentId: clean(data.get("scannedDocumentId"), 600) || existing?.scannedDocumentId || "", scannedDocumentTitle: existing?.scannedDocumentTitle || "Scanned official document", updatedAt: new Date().toISOString(),
   };
   if (!notice.title || !notice.category || !notice.targetAudience || !notice.message || !notice.principalName || !notice.designation || !notice.publicationDate) throw new Error("Complete all required notice fields.");
   if (!notice.signatureImage || !notice.sealImage) throw new Error("Principal signature and official school seal are required.");
@@ -287,6 +288,7 @@ document.addEventListener("click", (event) => {
 select("#officialCategoryFilter")?.addEventListener("change", renderPublicNotices);
 select('[data-admin-tab="officialNoticePanel"]')?.addEventListener("click", renderAdminNotices);
 document.addEventListener("keydown", (event) => { if (event.key === "Escape") closePreview(); });
+document.addEventListener("vvc:cloud-sync", (event) => { if (event.detail?.type === "notices") { renderPublicNotices(); renderAdminNotices(); } });
 
 if (select("#officialNoticeForm")) resetOfficialForm();
 renderPublicNotices();

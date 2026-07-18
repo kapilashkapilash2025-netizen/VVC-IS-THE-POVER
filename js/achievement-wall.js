@@ -21,6 +21,7 @@ function achievementSave() {
   try {
     localStorage.setItem(ACHIEVEMENT_STORAGE_KEY, JSON.stringify(achievementPosts));
     localStorage.setItem(ACHIEVEMENT_REACTION_KEY, JSON.stringify(achievementBrowserReactions));
+    if (window.VVCCloud) window.VVCCloud.putCollection("achievements", achievementPosts);
     return true;
   } catch {
     achievementNotify("Device storage is full. Remove large images or older posts and try again.");
@@ -272,12 +273,14 @@ function reactToAchievement(postId, reaction) {
   if (previous === reaction) delete achievementBrowserReactions[postId];
   else { post.reactions[reaction] = Number(post.reactions[reaction] || 0) + 1; achievementBrowserReactions[postId] = reaction; }
   achievementSave(); renderAllAchievements();
+  if (window.VVCCloud) window.VVCCloud.react(postId, previous === reaction ? null : reaction).catch((error) => achievementNotify(`Reaction was not synchronized: ${error.message}`));
 }
 
 function moderateAchievementMessage(postId, messageId, action) {
   const post = achievementPosts.find((item) => item.id === postId); const message = post?.messages?.find((item) => item.id === messageId); if (!message) return;
   if (action === "approve") message.status = "approved"; else post.messages = post.messages.filter((item) => item.id !== messageId);
   achievementSave(); renderAllAchievements(); achievementNotify(action === "approve" ? "Message approved." : "Message rejected.");
+  if (window.VVCCloud) window.VVCCloud.moderateMessage(messageId, action).catch((error) => achievementNotify(`Moderation was not synchronized: ${error.message}`));
 }
 
 function renderAllAchievements() { renderAchievementFilters(); renderAchievementFeatured(); renderAchievementWall(); renderAchievementAdmin(); }
@@ -294,8 +297,13 @@ document.addEventListener("submit", async (event) => {
     event.preventDefault(); const post = achievementPosts.find((item) => item.id === messageForm.dataset.achievementMessageForm); if (!post) return;
     const data = new FormData(messageForm), name = achievementClean(data.get("displayName"), 60), message = achievementClean(data.get("message"), 180);
     if (name.length < 2 || message.length < 3) { achievementNotify("Enter a display name and a short message."); return; }
-    post.messages ||= []; post.messages.push({ id: `message-${Date.now()}-${Math.random().toString(16).slice(2)}`, name, message, status: "pending", createdAt: new Date().toISOString() });
-    achievementSave(); messageForm.reset(); achievementNotify("Thank you. Your message is waiting for administrator approval.");
+    if (window.VVCCloud) {
+      try { await window.VVCCloud.submitMessage(post.id, name, message); }
+      catch (error) { achievementNotify(`Message could not be submitted: ${error.message}`); return; }
+    } else {
+      post.messages ||= []; post.messages.push({ id: `message-${Date.now()}-${Math.random().toString(16).slice(2)}`, name, message, status: "pending", createdAt: new Date().toISOString() }); achievementSave();
+    }
+    messageForm.reset(); achievementNotify("Thank you. Your message is waiting for administrator approval.");
   }
 });
 
@@ -319,6 +327,7 @@ document.addEventListener("click", (event) => {
 });
 
 document.getElementById("achievementSort")?.addEventListener("change", renderAchievementWall);
+document.addEventListener("vvc:cloud-sync", (event) => { if (event.detail?.type === "achievements") { achievementPosts = event.detail.records; renderAllAchievements(); } });
 document.addEventListener("keydown", (event) => { if (event.key === "Escape" && document.getElementById("achievementImageModal")?.classList.contains("active")) document.querySelector("[data-close-achievement-image]")?.click(); });
 resetAchievementForm();
 renderAllAchievements();
