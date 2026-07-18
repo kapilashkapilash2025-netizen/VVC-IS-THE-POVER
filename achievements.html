@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Official student achievement celebrations from Vavuniya Vipulanantha College." />
+  <title>Achievement Wall | Vavuniya Vipulanantha College</title>
+  <link rel="icon" href="assets/school-logo.png" type="image/png" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="css/achievement-wall.css" />
+  <link rel="stylesheet" href="css/experience-polish.css" />
+</head>
+<body class="achievement-page">
+  <a class="skip-link" href="#achievementMain">Skip to achievements</a>
+  <header class="site-header scrolled">
+    <div class="container header-container">
+      <a class="school-brand" href="index.html"><img src="assets/school-logo.png" alt="Vavuniya Vipulanantha College logo" /><div><h1>Vavuniya Vipulanantha College</h1><p lang="ta">வவுனியா விபுலாநந்தா கல்லூரி</p></div></a>
+      <nav class="main-navigation achievement-navigation" aria-label="Achievement navigation"><a href="index.html">Home</a><a href="notices.html">Official Notices</a><a class="active" href="achievements.html" aria-current="page">Achievements</a></nav>
+    </div>
+  </header>
+
+  <main id="achievementMain">
+    <section class="achievement-hero">
+      <div class="container achievement-hero-grid">
+        <div><span class="achievement-kicker">VVC Celebration of Excellence</span><h2>Every Achievement<br /><em>Inspires Our Future.</em></h2><p>Honouring academic, sporting, cultural, language and technology excellence across every level of competition.</p></div>
+        <div class="achievement-hero-crest"><img src="assets/school-logo.png" alt="VVC crest" /><strong>Achievement Wall</strong><span>Knowledge · Discipline · Excellence</span></div>
+      </div>
+    </section>
+
+    <section class="section achievement-featured-section" aria-labelledby="featuredAchievementTitle">
+      <div class="container"><div class="achievement-section-heading"><div><span class="achievement-kicker">Featured Honour</span><h2 id="featuredAchievementTitle">Achievement of the Month</h2></div></div><div id="achievementFeatured" aria-live="polite"></div></div>
+    </section>
+
+    <section class="section achievement-wall-section" aria-labelledby="achievementWallTitle">
+      <div class="container">
+        <div class="achievement-section-heading"><div><span class="achievement-kicker">Student Success</span><h2 id="achievementWallTitle">Celebration Wall</h2><p>Celebrate the students who represent the spirit of VVC.</p></div></div>
+        <div class="achievement-toolbar" aria-label="Achievement filters and sorting">
+          <div id="achievementFilters" class="achievement-filters" role="group" aria-label="Filter achievements"></div>
+          <label class="achievement-sort">Sort by<select id="achievementSort"><option value="latest">Latest</option><option value="reacted">Most reacted</option><option value="congratulated">Most congratulated</option><option value="pinned">Pinned achievements</option></select></label>
+        </div>
+        <div id="achievementWall" class="achievement-grid" aria-live="polite"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="achievement-footer"><div class="container"><img src="assets/school-logo.png" alt="" /><div><strong>Vavuniya Vipulanantha College</strong><p>Celebrating student excellence with pride.</p></div><a href="index.html">Return to school website</a></div></footer>
+
+  <div class="modal achievement-image-modal" id="achievementImageModal" role="dialog" aria-modal="true" aria-label="Achievement image preview"><div class="modal-backdrop" data-close-achievement-image></div><figure><button type="button" data-close-achievement-image aria-label="Close image preview">×</button><img id="achievementModalImage" alt="" /><figcaption id="achievementModalCaption"></figcaption></figure></div>
+  <div class="toast" id="achievementToast" role="status" aria-live="polite"></div>
+  <script src="js/achievement-wall.js"></script>
+</body>
+</html>
