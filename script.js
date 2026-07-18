@@ -674,13 +674,17 @@ function showGalleryPreview(galleryId) {
 function activateAdminTab(button) {
   document
     .querySelectorAll(".admin-tab")
-    .forEach((tab) => tab.classList.remove("active"));
+    .forEach((tab) => {
+      tab.classList.remove("active");
+      tab.setAttribute("aria-selected", "false");
+    });
 
   document
     .querySelectorAll(".admin-panel")
     .forEach((panel) => panel.classList.remove("active"));
 
   button.classList.add("active");
+  button.setAttribute("aria-selected", "true");
 
   const panel =
     document.getElementById(button.dataset.adminTab);
