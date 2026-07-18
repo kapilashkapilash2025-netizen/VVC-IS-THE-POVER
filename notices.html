@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Official announcements from the Principal of Vavuniya Vipulanantha College." />
+  <meta name="theme-color" content="#750d1d" />
+  <title>Official Notices | Vavuniya Vipulanantha College</title>
+  <link rel="icon" href="assets/school-logo.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+Tamil:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="css/official-notices.css" />
+  <link rel="stylesheet" href="css/document-scanner.css" />
+  <link rel="stylesheet" href="css/experience-polish.css" />
+</head>
+<body class="notices-page">
+  <a class="skip-link" href="#official-notices-main">Skip to official notices</a>
+  <header class="site-header scrolled">
+    <div class="container navigation-container">
+      <a href="index.html" class="school-brand">
+        <div class="logo-container"><img src="assets/school-logo.png" alt="Vavuniya Vipulanantha College logo" /></div>
+        <div class="brand-details"><span class="brand-short-name">VVC</span><h1>Vavuniya Vipulanantha College</h1><p lang="ta">வவுனியா விபுலாநந்தா கல்லூரி</p></div>
+      </a>
+      <nav class="main-navigation active" aria-label="Notice navigation"><a href="index.html">Home</a><a href="notices.html" aria-current="page">Official Notices</a></nav>
+    </div>
+  </header>
+
+  <section class="notices-page-header">
+    <div class="container"><span class="section-kicker">Principal’s Office</span><h1>Official Announcements</h1><p>Authoritative notices issued by the Principal of Vavuniya Vipulanantha College.</p></div>
+  </section>
+
+  <main id="official-notices-main" class="container notices-page-main">
+    <div class="notices-toolbar">
+      <div><h2>Current notices</h2><p>Expired and archived announcements are removed from this public view automatically.</p></div>
+      <label>Filter category
+        <select id="officialCategoryFilter"><option value="all">All notices</option><option value="parents">Parents’ Meetings</option><option value="examination">Examinations</option><option value="event">Events</option><option value="emergency">Emergency</option><option value="closure">School Closures</option><option value="competition">Competitions</option><option value="general">General</option></select>
+      </label>
+    </div>
+    <div id="officialNoticesPageList" class="official-notice-list" aria-live="polite"></div>
+  </main>
+
+  <footer class="site-footer"><div class="container footer-bottom"><p>Vavuniya Vipulanantha College · Official Announcement System</p><a href="index.html">Return to school website</a></div></footer>
+  <div id="officialPrintArea" aria-hidden="true"></div>
+  <div class="modal scanner-document-viewer" id="scannerDocumentViewer" role="dialog" aria-modal="true" aria-label="Scanned document preview"><div class="modal-backdrop" data-close-document-viewer></div><section><header><strong id="scannerViewerTitle">Scanned document</strong><button id="closeScannerViewer" type="button" aria-label="Close document preview">×</button></header><iframe id="scannerPdfFrame" title="Scanned PDF preview"></iframe></section></div>
+  <script src="js/official-notices.js"></script>
+  <script src="js/document-scanner.js"></script>
+</body>
+</html>

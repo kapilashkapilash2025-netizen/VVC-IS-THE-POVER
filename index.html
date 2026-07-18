@@ -1,0 +1,1421 @@
+<!DOCTYPE html>
+<html lang="en" class="profile-loading">
+<head>
+  <meta charset="UTF-8" />
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  />
+
+  <meta
+    name="description"
+    content="Official digital school portal of Vavuniya Vipulanantha College for notices, events, competitions, invitations and school gallery updates."
+  />
+
+  <meta
+    name="theme-color"
+    content="#750d1d"
+  />
+
+  <title>Vavuniya Vipulanantha College</title>
+
+  <link rel="icon" href="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preload" href="assets/school-logo.png" as="image" fetchpriority="high" />
+  <link rel="preload" href="style.css" as="style" />
+  <link rel="preload" href="script.js" as="script" />
+  <link rel="preload" href="js/official-notices.js" as="script" />
+  <link rel="preload" href="js/document-scanner.js" as="script" />
+  <link rel="preload" href="js/achievement-wall.js" as="script" />
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+Tamil:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800&display=swap"
+    rel="stylesheet"
+  />
+
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="css/profile-loader.css" />
+  <link rel="stylesheet" href="css/official-notices.css" />
+  <link rel="stylesheet" href="css/document-scanner.css" />
+  <link rel="stylesheet" href="css/achievement-wall.css" />
+  <link rel="stylesheet" href="css/experience-polish.css" />
+  <script>try{if(sessionStorage.getItem("vvcOfficialProfileLoaded")==="1")document.documentElement.classList.remove("profile-loading");}catch{}</script>
+</head>
+
+<body>
+  <!-- Official School Profile loading experience; skipped after the first session visit. -->
+  <div class="page-loader profile-loader" id="pageLoader" role="status" aria-live="polite" aria-label="Loading the VVC Digital Campus">
+    <div class="profile-loader-glow" aria-hidden="true"></div>
+    <div class="profile-loader-frame" aria-hidden="true"></div>
+    <div class="profile-loader-content">
+      <span class="profile-loader-eyebrow">Official School Profile</span>
+      <div class="profile-loader-logo"><span class="profile-logo-orbit" aria-hidden="true"></span><img src="assets/school-logo.png" alt="Vavuniya Vipulanantha College official crest" width="150" height="150" /></div>
+      <h1>VIPULANANTHA COLLEGE</h1>
+      <p class="profile-loader-motto" lang="ta">கேடில் விழுச்செல்வம் கல்வி</p>
+      <div class="profile-loader-progress" aria-hidden="true"><span id="profileLoaderProgress"></span></div>
+      <div class="profile-loader-status"><strong>Loading Digital Campus...</strong><span id="profileLoaderMessage">Preparing the official school profile</span></div>
+    </div>
+    <span class="profile-loader-corner corner-one" aria-hidden="true"></span><span class="profile-loader-corner corner-two" aria-hidden="true"></span>
+  </div>
+
+  <!-- Announcement Bar -->
+  <div class="announcement-bar">
+    <div class="container announcement-content">
+      <div class="announcement-left">
+        <span class="live-dot"></span>
+        <strong>School Information Portal</strong>
+
+        <span class="announcement-text">
+          Welcome to the digital portal of Vavuniya Vipulanantha College.
+        </span>
+      </div>
+
+      <div class="announcement-right">
+        <a href="tel:+94242221988">☎ 024 222 1988</a>
+        <span id="liveDate"></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header class="site-header" id="siteHeader">
+    <div class="container navigation-container">
+      <a href="#home" class="school-brand">
+        <div class="logo-container">
+          <img
+            src="assets/school-logo.png"
+            alt="Vavuniya Vipulanantha College logo"
+          />
+        </div>
+
+        <div class="brand-details">
+          <span class="brand-short-name">
+            VVC
+          </span>
+
+          <h1>Vavuniya Vipulanantha College</h1>
+
+          <p lang="ta">
+            வவுனியா விபுலாநந்தா கல்லூரி
+          </p>
+        </div>
+      </a>
+
+      <button
+        class="mobile-navigation-button"
+        id="mobileNavigationButton"
+        aria-label="Open navigation menu"
+        aria-expanded="false"
+      >
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <nav class="main-navigation" id="mainNavigation">
+        <a href="#home" class="navigation-link active">Home</a>
+        <a href="#about" class="navigation-link">About</a>
+        <a href="#updates" class="navigation-link">News &amp; Updates</a>
+        <a href="notices.html" class="navigation-link">Official Notices</a>
+        <a href="achievements.html" class="navigation-link">Achievements</a>
+        <a href="#gallery" class="navigation-link">Gallery</a>
+        <a href="#academics" class="navigation-link">Academics</a>
+        <a href="#contact" class="navigation-link">Contact</a>
+
+        <button class="admin-button" id="adminLoginButton">
+          <span>🔐</span>
+          Admin
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero Section -->
+    <section class="hero-section" id="home">
+      <div class="hero-image"></div>
+      <div class="hero-overlay"></div>
+      <div class="hero-pattern"></div>
+
+      <div class="container hero-container">
+        <div class="hero-content">
+          <div class="hero-status">
+            <span class="status-line"></span>
+            Provincial 1AB Tamil Medium School
+          </div>
+
+          <p class="hero-tamil-title" lang="ta">
+            வவுனியா விபுலாநந்தா கல்லூரி
+          </p>
+
+          <h2>
+            Learning Today.
+            <span>Leading Tomorrow.</span>
+          </h2>
+
+          <p class="hero-description">
+            Empowering students through knowledge, discipline,
+            culture, innovation and excellence from Grade 1 to
+            Grade 13.
+          </p>
+
+          <div class="hero-actions">
+            <a href="#updates" class="primary-button">
+              <span>Latest News &amp; Notices</span>
+              <span aria-hidden="true">→</span>
+            </a>
+
+            <a href="#about" class="outline-button">
+              Discover Our School
+            </a>
+          </div>
+
+          <div class="hero-information">
+            <div class="hero-info-item">
+              <span class="info-number">1958</span>
+              <span class="info-label">Established</span>
+            </div>
+
+            <div class="hero-info-divider"></div>
+
+            <div class="hero-info-item">
+              <span class="info-number">1–13</span>
+              <span class="info-label">Grade Range</span>
+            </div>
+
+            <div class="hero-info-divider"></div>
+
+            <div class="hero-info-item">
+              <span class="info-number">1AB</span>
+              <span class="info-label">School Category</span>
+            </div>
+
+            <div class="hero-info-divider"></div>
+
+            <div class="hero-info-item">
+              <span class="info-number">Tamil</span>
+              <span class="info-label">Teaching Medium</span>
+            </div>
+          </div>
+        </div>
+
+        <aside class="hero-school-card">
+          <div class="hero-card-logo">
+            <img
+              src="assets/school-logo.png"
+              alt="Vavuniya Vipulanantha College crest"
+            />
+          </div>
+
+          <span class="hero-card-label">Official School Profile</span>
+
+          <h3>Vipulanantha College</h3>
+
+          <p lang="ta">
+            கேடில் விழுச்செல்வம் கல்வி
+          </p>
+
+          <div class="hero-card-details">
+            <div>
+              <span>📍</span>
+
+              <p>
+                <small>Location</small>
+                <strong>Pandarikulam, Vavuniya</strong>
+              </p>
+            </div>
+
+            <div>
+              <span>🏫</span>
+
+              <p>
+                <small>School Type</small>
+                <strong>Provincial Mixed School</strong>
+              </p>
+            </div>
+
+            <div>
+              <span>☎</span>
+
+              <p>
+                <small>Telephone</small>
+                <strong>024 222 1988</strong>
+              </p>
+            </div>
+          </div>
+        </aside>
+      </div>
+
+      <a href="#about" class="scroll-indicator">
+        <span>Scroll to explore</span>
+        <span class="scroll-mouse"></span>
+      </a>
+    </section>
+
+    <!-- Quick Access -->
+    <section class="quick-access-section">
+      <div class="container quick-access-grid">
+        <a href="notices.html" class="quick-access-card">
+          <div class="quick-access-icon">📢</div>
+
+          <div>
+            <span>Information</span>
+            <h3>School Notices</h3>
+            <p>View important notices and announcements.</p>
+          </div>
+
+          <span class="quick-arrow">→</span>
+        </a>
+
+        <a href="#updates" class="quick-access-card">
+          <div class="quick-access-icon">📅</div>
+
+          <div>
+            <span>Activities</span>
+            <h3>Events</h3>
+            <p>Explore upcoming programmes and ceremonies.</p>
+          </div>
+
+          <span class="quick-arrow">→</span>
+        </a>
+
+        <a href="#updates" class="quick-access-card">
+          <div class="quick-access-icon">🏆</div>
+
+          <div>
+            <span>Opportunities</span>
+            <h3>Competitions</h3>
+            <p>Find competition and registration details.</p>
+          </div>
+
+          <span class="quick-arrow">→</span>
+        </a>
+
+        <a href="#gallery" class="quick-access-card">
+          <div class="quick-access-icon">🖼️</div>
+
+          <div>
+            <span>School Life</span>
+            <h3>Photo Gallery</h3>
+            <p>View school activities and achievements.</p>
+          </div>
+
+          <span class="quick-arrow">→</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- Official Principal Announcements -->
+    <section class="section official-notices-section" aria-labelledby="official-notices-title">
+      <div class="container">
+        <div class="official-notices-heading">
+          <div>
+            <div class="section-intro"><span class="section-kicker">Principal’s Office</span><span class="title-line"></span></div>
+            <h2 id="official-notices-title">Official Announcements</h2>
+            <p>Verified notices published by the Principal of Vavuniya Vipulanantha College.</p>
+          </div>
+          <a class="primary-button" href="notices.html">View all official notices</a>
+        </div>
+        <div id="officialNoticeHome" class="official-notice-list home-list" aria-live="polite"></div>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="section achievement-home-section" aria-labelledby="achievement-home-title">
+      <div class="container">
+        <div class="achievement-section-heading">
+          <div><span class="achievement-kicker">Celebrating VVC Excellence</span><h2 id="achievement-home-title">Achievement Wall</h2><p>Recognising the dedication and success of our students.</p></div>
+          <a class="primary-button" href="achievements.html">Explore all achievements</a>
+        </div>
+        <div id="achievementHomeFeature" aria-live="polite"></div>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="section about-section" id="about">
+      <div class="container about-grid">
+        <div class="about-visual">
+          <div class="about-image-main">
+            <img
+              src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw=="
+              alt="Approved campus photograph pending"
+            />
+          </div>
+
+          <div class="about-logo-card">
+            <img src="assets/school-logo.png" alt="Vavuniya Vipulanantha College crest" />
+
+            <div>
+              <strong>VVC</strong>
+              <span>Since 1958</span>
+            </div>
+          </div>
+
+          <div class="about-experience">
+            <strong id="schoolYears">68</strong>
+            <span>Years of Educational Service</span>
+          </div>
+        </div>
+
+        <div class="about-content">
+          <div class="section-intro">
+            <span class="section-kicker">About Our College</span>
+            <span class="title-line"></span>
+          </div>
+
+          <h2>
+            A Proud Centre of Tamil Education in Vavuniya
+          </h2>
+
+          <p class="about-lead">
+            Vipulanantha College is a provincial 1AB Tamil-medium
+            mixed school situated in Pandarikulam, Vavuniya,
+            Northern Province, Sri Lanka.
+          </p>
+
+          <p>
+            The college provides education from Grade 1 to Grade 13
+            and supports students through primary, secondary,
+            G.C.E. Ordinary Level and G.C.E. Advanced Level
+            education.
+          </p>
+
+          <p>
+            Our school community promotes academic achievement,
+            leadership, cultural identity, discipline, sports,
+            technology and responsible citizenship.
+          </p>
+
+          <div class="school-values">
+            <div class="value-card">
+              <span>01</span>
+              <div>
+                <h3>Knowledge</h3>
+                <p>Learning with purpose and intellectual curiosity.</p>
+              </div>
+            </div>
+
+            <div class="value-card">
+              <span>02</span>
+              <div>
+                <h3>Discipline</h3>
+                <p>Building responsibility, respect and character.</p>
+              </div>
+            </div>
+
+            <div class="value-card">
+              <span>03</span>
+              <div>
+                <h3>Excellence</h3>
+                <p>Encouraging every student to reach their potential.</p>
+              </div>
+            </div>
+
+            <div class="value-card">
+              <span>04</span>
+              <div>
+                <h3>Unity</h3>
+                <p>Growing together as one strong school community.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Principal Message -->
+    <section class="principal-section">
+      <div class="container principal-container">
+        <div class="principal-symbol">“</div>
+
+        <div class="principal-content">
+          <div class="section-intro light-intro">
+            <span class="section-kicker">Message from the School</span>
+            <span class="title-line"></span>
+          </div>
+
+          <blockquote>
+            Education is not only the acquisition of knowledge.
+            It is the development of discipline, character,
+            responsibility and the confidence to serve society.
+          </blockquote>
+
+          <p>
+            We welcome students, parents, teachers, alumni and the
+            wider community to our official digital information
+            portal.
+          </p>
+
+          <div class="principal-signature">
+            <strong>School Administration</strong>
+            <span>Vavuniya Vipulanantha College</span>
+          </div>
+        </div>
+
+        <div class="principal-logo">
+          <img src="assets/school-logo.png" alt="Vavuniya Vipulanantha College crest" />
+        </div>
+      </div>
+    </section>
+
+    <!-- Updates Section -->
+    <section class="section updates-section" id="updates">
+      <div class="container">
+        <div class="section-header">
+          <div>
+            <div class="section-intro">
+              <span class="section-kicker">Information Centre</span>
+              <span class="title-line"></span>
+            </div>
+
+            <h2>Latest School Updates</h2>
+
+            <p>
+              Notices, events, competitions and invitations published
+              by the school administration.
+            </p>
+          </div>
+
+          <div class="update-filters" id="updateFilters">
+            <button class="filter-button active" data-filter="all">
+              All Updates
+            </button>
+
+            <button class="filter-button" data-filter="notice">
+              Notices
+            </button>
+
+            <button class="filter-button" data-filter="event">
+              Events
+            </button>
+
+            <button class="filter-button" data-filter="competition">
+              Competitions
+            </button>
+
+            <button class="filter-button" data-filter="invitation">
+              Invitations
+            </button>
+          </div>
+        </div>
+
+        <div class="updates-grid" id="updatesGrid"></div>
+
+        <div class="empty-state hidden" id="updatesEmptyState">
+          <span>📭</span>
+          <h3>No updates available</h3>
+          <p>New information published by the school will appear here.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Academic Section -->
+    <section class="section academics-section" id="academics">
+      <div class="container">
+        <div class="centered-section-header">
+          <div class="section-intro centered-intro">
+            <span class="title-line"></span>
+            <span class="section-kicker">Academic Journey</span>
+            <span class="title-line"></span>
+          </div>
+
+          <h2>Education from Grade 1 to Grade 13</h2>
+
+          <p>
+            Supporting every stage of a student's academic and
+            personal development.
+          </p>
+        </div>
+
+        <div class="academic-grid">
+          <article class="academic-card">
+            <div class="academic-number">01</div>
+            <div class="academic-icon">📘</div>
+
+            <h3>Primary Education</h3>
+            <span>Grades 1–5</span>
+
+            <p>
+              Strong foundations in language, mathematics,
+              environmental studies, creativity and personal
+              development.
+            </p>
+          </article>
+
+          <article class="academic-card featured-academic">
+            <div class="academic-number">02</div>
+            <div class="academic-icon">📚</div>
+
+            <h3>Junior Secondary</h3>
+            <span>Grades 6–9</span>
+
+            <p>
+              Broad subject learning that develops analytical
+              ability, communication, teamwork and digital skills.
+            </p>
+          </article>
+
+          <article class="academic-card">
+            <div class="academic-number">03</div>
+            <div class="academic-icon">🎓</div>
+
+            <h3>G.C.E. Ordinary Level</h3>
+            <span>Grades 10–11</span>
+
+            <p>
+              Structured academic preparation for national
+              examinations and future educational pathways.
+            </p>
+          </article>
+
+          <article class="academic-card">
+            <div class="academic-number">04</div>
+            <div class="academic-icon">🔬</div>
+
+            <h3>G.C.E. Advanced Level</h3>
+            <span>Grades 12–13</span>
+
+            <p>
+              Advanced learning pathways supporting university,
+              professional and vocational opportunities.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Gallery -->
+    <section class="section gallery-section" id="gallery">
+      <div class="container">
+        <div class="section-header">
+          <div>
+            <div class="section-intro">
+              <span class="section-kicker">Memories and Achievements</span>
+              <span class="title-line"></span>
+            </div>
+
+            <h2>School Gallery</h2>
+
+            <p>
+              Explore the activities, achievements and memorable
+              moments of our school community.
+            </p>
+          </div>
+
+          <button class="gallery-view-button" id="viewAllGalleryButton">
+            View All Photos
+          </button>
+        </div>
+
+        <div class="gallery-grid" id="galleryGrid"></div>
+
+        <div class="empty-state hidden" id="galleryEmptyState">
+          <span>🖼️</span>
+          <h3>No photos available</h3>
+          <p>Gallery photos published by the school will appear here.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Statistics -->
+    <section class="statistics-section">
+      <div class="statistics-overlay"></div>
+
+      <div class="container statistics-grid">
+        <div class="statistic-card">
+          <strong data-counter="1958">0</strong>
+          <span>Established</span>
+        </div>
+
+        <div class="statistic-card">
+          <strong data-counter="13">0</strong>
+          <span>Grade Levels</span>
+        </div>
+
+        <div class="statistic-card">
+          <strong data-counter="4">0</strong>
+          <span>Educational Stages</span>
+        </div>
+
+        <div class="statistic-card">
+          <strong data-counter="1">0</strong>
+          <span>United School Community</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section class="section contact-section" id="contact">
+      <div class="container contact-grid">
+        <div class="contact-information">
+          <div class="section-intro">
+            <span class="section-kicker">Contact Information</span>
+            <span class="title-line"></span>
+          </div>
+
+          <h2>Connect with Our School</h2>
+
+          <p>
+            Contact the school office for admissions, notices,
+            meetings and general enquiries.
+          </p>
+
+          <div class="contact-list">
+            <a
+              href="https://maps.google.com/?q=Vipulanantha+College+Vavuniya"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="contact-item"
+            >
+              <span class="contact-icon">📍</span>
+
+              <div>
+                <small>School Address</small>
+                <strong>
+                  School Road, Pandarikulam,<br />
+                  Vavuniya 43000, Sri Lanka
+                </strong>
+              </div>
+            </a>
+
+            <a href="tel:+94242221988" class="contact-item">
+              <span class="contact-icon">☎</span>
+
+              <div>
+                <small>Telephone</small>
+                <strong>024 222 1988</strong>
+              </div>
+            </a>
+
+            <div class="contact-item">
+              <span class="contact-icon">🏫</span>
+
+              <div>
+                <small>Education Administration</small>
+                <strong>
+                  Vavuniya South Education Zone,<br />
+                  Northern Province
+                </strong>
+              </div>
+            </div>
+
+            <div class="contact-item">
+              <span class="contact-icon">🕒</span>
+
+              <div>
+                <small>School Office</small>
+                <strong>Monday–Friday, School Hours</strong>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="contact-map">
+          <iframe
+            title="Vipulanantha College Location"
+            src="https://www.google.com/maps?q=Vipulanantha%20College%20Vavuniya&output=embed"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+          ></iframe>
+
+          <div class="map-information">
+            <img src="assets/school-logo.png" alt="Vavuniya Vipulanantha College logo" />
+
+            <div>
+              <strong>Vavuniya Vipulanantha College</strong>
+              <span>Pandarikulam, Vavuniya</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="school-cta-section">
+      <div class="container school-cta-container">
+        <div>
+          <span>Vavuniya Vipulanantha College</span>
+
+          <h2>
+            Knowledge, Discipline, Unity and Excellence
+          </h2>
+        </div>
+
+        <a href="#updates" class="yellow-button">
+          Explore Latest Updates
+          <span>→</span>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="footer-pattern"></div>
+
+    <div class="container footer-grid">
+      <div class="footer-about">
+        <div class="footer-brand">
+          <img src="assets/school-logo.png" alt="Vavuniya Vipulanantha College logo" />
+
+          <div>
+            <strong>Vavuniya Vipulanantha College</strong>
+            <span lang="ta">வவுனியா விபுலாநந்தா கல்லூரி</span>
+          </div>
+        </div>
+
+        <p>
+          A provincial 1AB Tamil-medium mixed school providing
+          education from Grade 1 to Grade 13 in Pandarikulam,
+          Vavuniya.
+        </p>
+
+        <div class="school-colours">
+          <span class="colour-maroon"></span>
+          <span class="colour-gold"></span>
+          <small>Official School Theme</small>
+        </div>
+      </div>
+
+      <div class="footer-column">
+        <h3>Quick Links</h3>
+
+        <a href="#home">Home</a>
+        <a href="#about">About the School</a>
+        <a href="#academics">Academic Sections</a>
+        <a href="#gallery">School Gallery</a>
+      </div>
+
+      <div class="footer-column">
+        <h3>Information</h3>
+
+        <a href="#updates">Notices</a>
+        <a href="#updates">Events</a>
+        <a href="#updates">Competitions</a>
+        <a href="#updates">Invitations</a>
+      </div>
+
+      <div class="footer-column">
+        <h3>Contact</h3>
+
+        <p>School Road, Pandarikulam</p>
+        <p>Vavuniya 43000, Sri Lanka</p>
+        <a href="tel:+94242221988">024 222 1988</a>
+      </div>
+    </div>
+
+    <div class="container footer-bottom">
+      <p>
+        © <span id="currentYear"></span>
+        Vavuniya Vipulanantha College. All rights reserved.
+      </p>
+
+      <p>
+        School Digital Information Portal
+      </p>
+    </div>
+  </footer>
+
+  <!-- Admin Login Modal -->
+  <div class="modal" id="loginModal">
+    <div
+      class="modal-backdrop"
+      data-close-modal="loginModal"
+    ></div>
+
+    <div class="modal-card login-modal-card">
+      <button
+        class="modal-close"
+        data-close-modal="loginModal"
+        aria-label="Close"
+      >
+        ×
+      </button>
+
+      <div class="login-logo">
+        <img src="assets/school-logo.png" alt="Vavuniya Vipulanantha College logo" />
+      </div>
+
+      <div class="modal-heading">
+        <span>Secure Administration</span>
+        <h2>Admin Sign In</h2>
+
+        <p>
+          Sign in to publish notices, events, invitations,
+          competitions and gallery photos.
+        </p>
+      </div>
+
+      <form id="loginForm">
+        <div class="form-group">
+          <label for="adminUsername">Username</label>
+
+          <input
+            type="text"
+            id="adminUsername"
+            placeholder="Enter username"
+            autocomplete="username"
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="adminPassword">Password</label>
+
+          <div class="password-field">
+            <input
+              type="password"
+              id="adminPassword"
+              placeholder="Enter password"
+              autocomplete="current-password"
+              required
+            />
+
+            <button
+              type="button"
+              id="togglePasswordButton"
+              aria-label="Show password"
+            >
+              👁
+            </button>
+          </div>
+        </div>
+
+        <p class="form-message error-message" id="loginMessage"></p>
+
+        <button type="submit" class="primary-button full-button">
+          Sign In to Dashboard
+        </button>
+      </form>
+
+      <div class="demo-credentials">
+        <span>Development login</span>
+        <p>
+          Username: <strong>admin</strong> ·
+          Password: <strong>vvc1958</strong>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Admin Dashboard -->
+  <div class="modal admin-modal" id="adminModal">
+    <div
+      class="modal-backdrop"
+      data-close-modal="adminModal"
+    ></div>
+
+    <div class="modal-card admin-dashboard">
+      <button
+        class="modal-close"
+        data-close-modal="adminModal"
+        aria-label="Close"
+      >
+        ×
+      </button>
+
+      <div class="admin-dashboard-header">
+        <div class="admin-heading">
+          <img src="assets/school-logo.png" alt="Vavuniya Vipulanantha College logo" />
+
+          <div>
+            <span>VVC Administration</span>
+            <h2>Content Management Dashboard</h2>
+            <p>Manage public school information.</p>
+          </div>
+        </div>
+
+        <button class="logout-button" id="logoutButton">
+          Sign Out
+        </button>
+      </div>
+
+      <div class="admin-summary">
+        <div>
+          <span>Published Updates</span>
+          <strong id="adminUpdateCount">0</strong>
+        </div>
+
+        <div>
+          <span>Gallery Photos</span>
+          <strong id="adminGalleryCount">0</strong>
+        </div>
+
+        <div>
+          <span>Total Likes</span>
+          <strong id="adminLikeCount">0</strong>
+        </div>
+
+        <div>
+          <span>Active Official Notices</span>
+          <strong id="officialNoticeCount">0</strong>
+        </div>
+
+        <div>
+          <span>Achievements</span>
+          <strong id="adminAchievementCount">0</strong>
+        </div>
+      </div>
+
+      <div class="admin-tabs">
+        <button
+          class="admin-tab active"
+          data-admin-tab="addUpdatePanel"
+        >
+          New Update
+        </button>
+
+        <button
+          class="admin-tab"
+          data-admin-tab="addGalleryPanel"
+        >
+          Gallery Upload
+        </button>
+
+        <button
+          class="admin-tab"
+          data-admin-tab="officialNoticePanel"
+        >
+          Official Notice
+        </button>
+
+        <button class="admin-tab" data-admin-tab="achievementAdminPanel">
+          Achievements
+        </button>
+
+        <button
+          class="admin-tab"
+          data-admin-tab="manageContentPanel"
+        >
+          Manage Content
+        </button>
+      </div>
+
+      <!-- Add Update -->
+      <section class="admin-panel active" id="addUpdatePanel">
+        <div class="panel-title">
+          <h3>Publish School Update</h3>
+          <p>Three simple steps: choose type, write details, add a photo.</p>
+        </div>
+
+        <form id="updateForm" class="admin-form">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="updateType">Update Category</label>
+
+              <select id="updateType" required>
+                <option value="notice">School Notice</option>
+                <option value="event">School Event</option>
+                <option value="competition">Competition</option>
+                <option value="invitation">Invitation</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="updateDate">Publication/Event Date</label>
+
+              <input type="date" id="updateDate" required />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="updateTitle">Title</label>
+
+            <input
+              type="text"
+              id="updateTitle"
+              maxlength="120"
+              placeholder="Example: Annual Inter-House Sports Meet"
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="updateDescription">Full Information</label>
+
+            <textarea
+              id="updateDescription"
+              maxlength="1000"
+              rows="6"
+              placeholder="Enter complete details for students, parents and visitors."
+              required
+            ></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="updateImage">Photo <span class="optional-label">Optional</span></label>
+
+            <input
+              type="file"
+              id="updateImage"
+              accept="image/jpeg,image/png,image/webp,image/heic,image/heif"
+            />
+
+            <small>
+              Choose from phone Photos, Gallery or Files. Images are optimized up to QHD quality.
+            </small>
+
+            <div class="upload-preview" id="updateImagePreview" hidden>
+              <img src="" alt="Selected update photo preview" />
+              <button type="button" data-clear-upload="updateImage">Remove photo</button>
+            </div>
+          </div>
+
+          <p
+            class="form-message success-message"
+            id="updateFormMessage"
+          ></p>
+
+          <button type="submit" class="primary-button">
+            Publish Now
+          </button>
+        </form>
+      </section>
+
+      <!-- Add Gallery -->
+      <section class="admin-panel" id="addGalleryPanel">
+        <div class="panel-title">
+          <h3>Add School Gallery Photo</h3>
+          <p>Select a photo directly from this phone or device.</p>
+        </div>
+
+        <form id="galleryForm" class="admin-form">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="galleryTitle">Photo Title</label>
+
+              <input
+                type="text"
+                id="galleryTitle"
+                maxlength="120"
+                placeholder="Example: School Sports Meet"
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="galleryCategory">Category</label>
+
+              <select id="galleryCategory" required>
+                <option value="School Event">School Event</option>
+                <option value="Academic">Academic</option>
+                <option value="Sports">Sports</option>
+                <option value="Competition">Competition</option>
+                <option value="Culture">Culture</option>
+                <option value="Achievement">Achievement</option>
+                <option value="Community">Community</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="galleryImage">Choose Photo</label>
+
+            <input
+              type="file"
+              id="galleryImage"
+              accept="image/jpeg,image/png,image/webp,image/heic,image/heif"
+              required
+            />
+
+            <small>High-quality images are optimized up to 2560 × 1440 before saving.</small>
+
+            <div class="upload-preview" id="galleryImagePreview" hidden>
+              <img src="" alt="Selected gallery photo preview" />
+              <button type="button" data-clear-upload="galleryImage">Remove photo</button>
+            </div>
+          </div>
+
+          <p
+            class="form-message success-message"
+            id="galleryFormMessage"
+          ></p>
+
+          <button type="submit" class="primary-button">
+            Add Photo
+          </button>
+        </form>
+      </section>
+
+      <!-- Official Principal Notice -->
+      <section class="admin-panel" id="officialNoticePanel">
+        <div class="panel-title">
+          <h3 id="officialFormMode">Create an official announcement</h3>
+          <p>Protected local admin workflow: complete, preview, confirm and publish.</p>
+        </div>
+
+        <form id="officialNoticeForm" class="official-admin-form">
+          <fieldset>
+            <legend>Notice details</legend>
+            <div class="official-form-grid">
+              <div class="official-field full"><label for="officialTitle">Notice title *</label><input id="officialTitle" name="title" maxlength="140" required /></div>
+              <div class="official-field"><label for="officialCategory">Category *</label><select id="officialCategory" name="category" required><option value="parents">Parents’ Meeting</option><option value="examination">Examination</option><option value="event">School Event</option><option value="emergency">Emergency Notice</option><option value="closure">School Closure</option><option value="competition">Competition</option><option value="general">General Notice</option></select></div>
+              <div class="official-field"><label for="officialPriority">Priority *</label><select id="officialPriority" name="priority" required><option value="normal">Normal</option><option value="high">High</option><option value="urgent">Urgent</option></select></div>
+              <div class="official-field"><label for="officialAudience">Target audience *</label><input id="officialAudience" name="targetAudience" maxlength="120" placeholder="Parents, students, staff…" required /></div>
+              <div class="official-field"><label for="officialGrade">Grade</label><input id="officialGrade" name="grade" maxlength="40" placeholder="Grade 10 / All grades" /></div>
+              <div class="official-field"><label for="officialClass">Class</label><input id="officialClass" name="className" maxlength="40" placeholder="A / All classes" /></div>
+              <div class="official-field full"><label for="officialMessage">Full official message *</label><textarea id="officialMessage" name="message" maxlength="4000" required></textarea></div>
+              <label class="official-check full"><input type="checkbox" name="pinned" /> Pin this notice above other announcements</label>
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend>Schedule and venue</legend>
+            <div class="official-form-grid three">
+              <div class="official-field"><label for="officialMeetingDate">Meeting/event date</label><input id="officialMeetingDate" name="meetingDate" type="date" /></div>
+              <div class="official-field"><label for="officialMeetingTime">Meeting/event time</label><input id="officialMeetingTime" name="meetingTime" type="time" /></div>
+              <div class="official-field"><label for="officialVenue">Venue</label><input id="officialVenue" name="venue" maxlength="160" /></div>
+              <div class="official-field"><label for="officialPublicationDate">Publication date *</label><input id="officialPublicationDate" name="publicationDate" type="date" required /></div>
+              <div class="official-field"><label for="officialExpiryDate">Expiry date</label><input id="officialExpiryDate" name="expiryDate" type="date" /></div>
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend>Principal authorization</legend>
+            <div class="official-form-grid">
+              <div class="official-field"><label for="officialPrincipalName">Principal name *</label><input id="officialPrincipalName" name="principalName" maxlength="120" required /></div>
+              <div class="official-field"><label for="officialDesignation">Designation *</label><input id="officialDesignation" name="designation" value="Principal" maxlength="120" required /></div>
+              <div class="official-field"><label for="officialSignature">Principal signature image *</label><input id="officialSignature" type="file" accept="image/png,image/jpeg,image/webp" /><small>PNG, JPG or WebP; maximum 2.5 MB.</small></div>
+              <div class="official-field"><label for="officialSeal">Official school seal image *</label><input id="officialSeal" type="file" accept="image/png,image/jpeg,image/webp" /><small>PNG, JPG or WebP; maximum 2.5 MB.</small></div>
+              <div class="official-field full">
+                <label for="officialAttachment">Optional attachment or invitation image</label>
+                <input id="officialAttachment" type="file" accept="image/png,image/jpeg,image/webp" />
+                <div class="scanner-entry">
+                  <div><strong>Hard-copy document?</strong><span>Scan invitations, signed letters, circulars, examination notices or permission forms.</span></div>
+                  <button id="openDocumentScanner" type="button" class="scanner-launch-button">Scan Hard Document</button>
+                </div>
+                <input id="scannedDocumentId" name="scannedDocumentId" type="hidden" />
+                <div id="attachedScanSummary" class="attached-scan-summary" hidden></div>
+              </div>
+            </div>
+          </fieldset>
+
+          <p id="officialFormMessage" class="form-message" role="status" aria-live="polite"></p>
+          <div class="official-form-actions"><button id="cancelOfficialEdit" type="button" class="notice-action" hidden>Cancel edit</button><button type="submit" class="primary-button">Preview official notice</button></div>
+        </form>
+
+        <div class="management-section">
+          <div class="panel-title"><h3>Official notice management</h3><p>Edit, pin, archive, preview or delete published official notices.</p></div>
+          <div id="officialAdminNoticeList" class="official-admin-list"></div>
+        </div>
+      </section>
+
+      <!-- Achievement Wall Administration -->
+      <section class="admin-panel" id="achievementAdminPanel">
+        <div class="panel-title">
+          <h3 id="achievementFormHeading">Publish a student achievement</h3>
+          <p>Create celebrations and moderate congratulation messages.</p>
+        </div>
+        <form id="achievementForm" class="admin-form achievement-admin-form">
+          <input id="achievementEditId" type="hidden" />
+          <div class="form-row">
+            <div class="form-group"><label for="achievementStudentName">Student name</label><input id="achievementStudentName" maxlength="100" required /></div>
+            <div class="form-group"><label for="achievementGradeClass">Grade and class</label><input id="achievementGradeClass" maxlength="60" placeholder="Grade 10 A" required /></div>
+          </div>
+          <div class="form-row">
+            <div class="form-group"><label for="achievementCompetition">Competition or award name</label><input id="achievementCompetition" maxlength="140" required /></div>
+            <div class="form-group"><label for="achievementCategory">Category</label><select id="achievementCategory" required><option>Academic</option><option>Sports</option><option>Arts</option><option>Technology</option><option>Language</option><option>Cultural</option></select></div>
+          </div>
+          <div class="form-row">
+            <div class="form-group"><label for="achievementLevel">Achievement level</label><select id="achievementLevel" required><option>Selected</option><option>School Level</option><option>Zonal Level</option><option>District Level</option><option>Provincial Level</option><option>National Level</option></select></div>
+            <div class="form-group"><label for="achievementAward">Position or award</label><input id="achievementAward" maxlength="100" placeholder="Champion / First Place / Selected" required /></div>
+          </div>
+          <div class="form-row">
+            <div class="form-group"><label for="achievementDate">Achievement date</label><input id="achievementDate" type="date" required /></div>
+            <div class="form-group"><label for="achievementStudentPhoto">Student photograph</label><input id="achievementStudentPhoto" type="file" accept="image/jpeg,image/png,image/webp" /><small>Required for new posts; optimized before local storage.</small></div>
+          </div>
+          <div class="form-group"><label for="achievementDescription">Short description</label><textarea id="achievementDescription" maxlength="600" rows="4" required></textarea></div>
+          <div class="form-row">
+            <div class="form-group"><label for="achievementCertificate">Certificate image <span class="optional-label">Optional</span></label><input id="achievementCertificate" type="file" accept="image/jpeg,image/png,image/webp" /></div>
+            <div class="form-group"><label for="achievementGallery">Event gallery <span class="optional-label">Optional</span></label><input id="achievementGallery" type="file" accept="image/jpeg,image/png,image/webp" multiple /><small>Select up to six images.</small></div>
+          </div>
+          <div class="achievement-admin-checks">
+            <label><input id="achievementPinned" type="checkbox" /> Pin this achievement</label>
+            <label><input id="achievementFeatured" type="checkbox" /> Achievement of the Month</label>
+            <label><input id="achievementReactionsDisabled" type="checkbox" /> Disable reactions</label>
+          </div>
+          <p id="achievementFormMessage" class="form-message" role="status" aria-live="polite"></p>
+          <div class="achievement-form-actions"><button id="achievementCancelEdit" class="notice-action" type="button" hidden>Cancel edit</button><button class="primary-button" type="submit">Save achievement</button></div>
+        </form>
+        <div class="management-section"><div class="panel-title"><h3>Achievement management</h3><p>Edit, pin, archive or remove posts.</p></div><div id="achievementAdminList"></div></div>
+        <div class="management-section"><div class="panel-title"><h3>Pending congratulations</h3><p>Messages appear publicly only after approval.</p></div><div id="achievementModerationList"></div></div>
+      </section>
+
+      <!-- Manage -->
+      <section class="admin-panel" id="manageContentPanel">
+        <div class="management-section">
+          <div class="panel-title">
+            <h3>Published School Updates</h3>
+            <p>Remove incorrect or outdated information.</p>
+          </div>
+
+          <div id="adminUpdatesList"></div>
+        </div>
+
+        <div class="management-section">
+          <div class="panel-title">
+            <h3>Published Gallery Photos</h3>
+            <p>Review and remove gallery content.</p>
+          </div>
+
+          <div id="adminGalleryList"></div>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <!-- Update Detail Modal -->
+  <div class="modal" id="updateDetailModal">
+    <div
+      class="modal-backdrop"
+      data-close-modal="updateDetailModal"
+    ></div>
+
+    <article class="modal-card update-detail-card">
+      <button
+        class="modal-close"
+        data-close-modal="updateDetailModal"
+        aria-label="Close"
+      >
+        ×
+      </button>
+
+      <div class="detail-image">
+        <img id="detailImage" src="" alt="" />
+        <span id="detailBadge"></span>
+      </div>
+
+      <div class="detail-content">
+        <span id="detailDate"></span>
+        <h2 id="detailTitle"></h2>
+        <p id="detailDescription"></p>
+      </div>
+    </article>
+  </div>
+
+  <!-- Gallery Preview -->
+  <div class="modal" id="galleryPreviewModal">
+    <div
+      class="modal-backdrop"
+      data-close-modal="galleryPreviewModal"
+    ></div>
+
+    <article class="gallery-preview-card">
+      <button
+        class="modal-close image-close"
+        data-close-modal="galleryPreviewModal"
+        aria-label="Close"
+      >
+        ×
+      </button>
+
+      <img id="galleryPreviewImage" src="" alt="" />
+
+      <div>
+        <span id="galleryPreviewCategory"></span>
+        <h2 id="galleryPreviewTitle"></h2>
+      </div>
+    </article>
+  </div>
+
+  <!-- Official Notice Preview and Final Confirmation -->
+  <div class="modal official-preview-modal" id="officialPreviewModal" role="dialog" aria-modal="true" aria-labelledby="official-preview-title">
+    <div class="modal-backdrop" data-close-official-preview></div>
+    <div class="modal-card official-preview-dialog">
+      <div class="official-preview-toolbar">
+        <h2 id="official-preview-title">Official notice preview</h2>
+        <div class="official-preview-actions"><button type="button" class="notice-action" id="closeOfficialPreview">Close</button><button type="button" class="notice-action primary" id="confirmOfficialPublish">Confirm and publish</button></div>
+      </div>
+      <div id="officialPreviewContent"></div>
+    </div>
+  </div>
+
+  <div id="officialPrintArea" aria-hidden="true"></div>
+
+  <!-- Smart hard-document scanner -->
+  <div class="modal scanner-modal" id="documentScannerModal" role="dialog" aria-modal="true" aria-labelledby="scannerTitle">
+    <div class="modal-backdrop" data-close-scanner></div>
+    <section class="scanner-shell">
+      <header class="scanner-header">
+        <div><span class="scanner-kicker">VVC secure local workspace</span><h2 id="scannerTitle">Smart Document Scanner</h2></div>
+        <button id="closeDocumentScanner" class="scanner-icon-button" type="button" aria-label="Close scanner">×</button>
+      </header>
+
+      <div id="scannerStartStage" class="scanner-stage scanner-start-stage">
+        <div class="scanner-start-mark" aria-hidden="true">▣</div>
+        <h3>Scan an official hard-copy document</h3>
+        <p>The camera is requested only after you press Start Scanner. Unconfirmed camera frames are never saved.</p>
+        <div class="scanner-start-actions"><button id="startScannerCamera" class="primary-button" type="button">Start Scanner</button><label class="scanner-file-button">Choose existing images<input id="scannerFileInput" type="file" accept="image/*" multiple /></label></div>
+        <p id="scannerFallbackMessage" class="scanner-message" role="status"></p>
+      </div>
+
+      <div id="scannerCameraStage" class="scanner-stage" hidden>
+        <div class="camera-status-bar"><span id="cameraStatus">Starting camera…</span><span id="lightingStatus">Checking light</span><span id="stabilityStatus">Hold steady</span><span id="edgeStatus">Finding document</span></div>
+        <div class="camera-viewport">
+          <video id="scannerVideo" playsinline muted aria-label="Live document camera"></video>
+          <canvas id="scannerDetectionOverlay" aria-hidden="true"></canvas>
+          <div class="document-frame-guide" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+          <div id="captureCountdown" class="capture-countdown" hidden></div>
+          <div id="captureFlash" class="capture-flash" hidden></div>
+        </div>
+        <canvas id="scannerAnalysisCanvas" hidden></canvas>
+        <div class="scanner-camera-controls">
+          <label class="scanner-toggle"><input id="autoCaptureToggle" type="checkbox" checked /> Auto capture</label>
+          <button id="toggleTorch" class="scanner-secondary-button" type="button" disabled>Flash unavailable</button>
+          <button id="manualCapture" class="scanner-capture-button" type="button" aria-label="Capture document"><span></span></button>
+          <button id="stopScannerCamera" class="scanner-secondary-button" type="button">Close camera</button>
+        </div>
+      </div>
+
+      <div id="scannerEditorStage" class="scanner-stage scanner-editor" hidden>
+        <div class="scanner-editor-canvas"><canvas id="scannerEditCanvas" aria-label="Captured document editor"></canvas></div>
+        <aside class="scanner-tools" aria-label="Document editing tools">
+          <h3>Clean up page</h3>
+          <div class="scanner-tool-row"><button id="rotateScanLeft" type="button">↶ Rotate left</button><button id="rotateScanRight" type="button">↷ Rotate right</button></div>
+          <label>Colour mode<select id="scanColourMode"><option value="colour">Colour</option><option value="grayscale">Grayscale</option><option value="bw">Black &amp; white</option></select></label>
+          <label>Brightness <output id="brightnessValue">100%</output><input id="scanBrightness" type="range" min="60" max="150" value="100" /></label>
+          <label>Contrast <output id="contrastValue">100%</output><input id="scanContrast" type="range" min="60" max="180" value="100" /></label>
+          <label class="scanner-toggle"><input id="scanSharpen" type="checkbox" /> Sharpen text</label>
+          <details><summary>Manual crop adjustment</summary><label>Left<input id="cropLeft" type="range" min="0" max="35" value="0" /></label><label>Top<input id="cropTop" type="range" min="0" max="35" value="0" /></label><label>Right<input id="cropRight" type="range" min="65" max="100" value="100" /></label><label>Bottom<input id="cropBottom" type="range" min="65" max="100" value="100" /></label></details>
+          <div class="scanner-tool-actions"><button id="retakeScan" class="scanner-secondary-button" type="button">Retake</button><button id="confirmScanPage" class="primary-button" type="button">Confirm page</button></div>
+        </aside>
+      </div>
+
+      <div id="scannerPagesStage" class="scanner-stage" hidden>
+        <div class="scanner-pages-heading"><div><h3>Confirmed pages</h3><p id="scannerPageStats">0 pages</p></div><div><button id="addCameraPage" class="scanner-secondary-button" type="button">Add from camera</button><label class="scanner-file-button compact">Add image<input id="scannerAddFiles" type="file" accept="image/*" multiple /></label></div></div>
+        <div id="scannerPageList" class="scanner-page-list" aria-live="polite"></div>
+        <fieldset class="scanner-document-meta"><legend>PDF details</legend><label>PDF filename<input id="scanPdfFilename" maxlength="80" value="vvc-official-document.pdf" /></label><label>Document title<input id="scanDocumentTitle" maxlength="120" required /></label><label>Category<select id="scanDocumentCategory"><option>Scanned invitation</option><option>Signed principal letter</option><option>Meeting circular</option><option>Examination notice</option><option>Permission form</option><option>Official school document</option></select></label><label>Document date<input id="scanDocumentDate" type="date" /></label></fieldset>
+        <div class="scanner-pdf-summary"><span id="scanPageCount">0 pages</span><span id="scanSizeEstimate">Estimated PDF size: 0 KB</span></div>
+        <div class="scanner-final-actions"><button id="previewScannedPages" class="scanner-secondary-button" type="button">Preview pages</button><button id="generateScanPdf" class="primary-button" type="button">Generate optimized PDF</button></div>
+        <div id="scannerPdfResult" class="scanner-pdf-result" hidden><strong id="scannerPdfResultTitle"></strong><span id="scannerPdfResultMeta"></span><div><button id="previewGeneratedPdf" type="button">Preview</button><button id="downloadGeneratedPdf" type="button">Download</button><button id="attachGeneratedPdf" class="primary-button" type="button">Attach to official notice</button></div></div>
+      </div>
+    </section>
+  </div>
+
+  <div class="modal scanner-document-viewer" id="scannerDocumentViewer" role="dialog" aria-modal="true" aria-label="Scanned document preview">
+    <div class="modal-backdrop" data-close-document-viewer></div>
+    <section><header><strong id="scannerViewerTitle">Scanned document</strong><button id="closeScannerViewer" type="button" aria-label="Close document preview">×</button></header><iframe id="scannerPdfFrame" title="Scanned PDF preview"></iframe></section>
+  </div>
+
+  <!-- Back to Top -->
+  <button
+    class="back-to-top"
+    id="backToTop"
+    aria-label="Return to top"
+  >
+    ↑
+  </button>
+
+  <!-- Toast -->
+  <div class="toast-message" id="toastMessage" role="status" aria-live="polite"></div>
+
+  <script src="js/profile-loader.js"></script>
+  <script src="script.js"></script>
+  <script src="js/official-notices.js"></script>
+  <script src="js/document-scanner.js"></script>
+  <script src="js/achievement-wall.js"></script>
+</body>
+</html>
