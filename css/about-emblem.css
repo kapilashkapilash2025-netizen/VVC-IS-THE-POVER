@@ -1,0 +1,21 @@
+/* Official emblem placement inside the existing About panel. */
+.about-image-main {
+  display: grid;
+  min-height: 610px;
+  place-items: center;
+  background: linear-gradient(145deg, var(--maroon-700), var(--maroon-950));
+}
+
+.about-image-main img.about-college-emblem {
+  position: relative;
+  z-index: 1;
+  display: block;
+  width: clamp(180px, 42%, 330px);
+  height: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 12px 28px rgba(0, 0, 0, 0.28));
+}
+
+@media (max-width: 760px) {
+  .about-image-main { min-height: 450px; }
+}
