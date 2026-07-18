@@ -103,6 +103,7 @@ let likedUpdates = loadArray(
 
 let activeFilter = "all";
 let adminLoggedIn = false;
+let passwordRecoveryMode = false;
 let toastTimer = null;
 
 const updatesGrid = document.getElementById("updatesGrid");
@@ -862,20 +863,52 @@ loginForm.addEventListener("submit", async (event) => {
   const email = document
     .getElementById("adminUsername")
     .value.trim();
+  const password = document
+    .getElementById("adminPassword")
+    .value;
   const submitButton = loginForm.querySelector('button[type="submit"]');
   submitButton.disabled = true;
-  submitButton.textContent = "Sending secure link…";
+  submitButton.textContent = passwordRecoveryMode ? "Saving password…" : "Signing in…";
   try {
     if (!window.VVCCloud) throw new Error("Cloud sign-in is temporarily unavailable.");
-    await window.VVCCloud.sendMagicLink(email);
-    loginMessage.textContent = "Secure sign-in link sent. Open it from the authorized email inbox.";
+    if (passwordRecoveryMode) {
+      await window.VVCCloud.updatePassword(password);
+      passwordRecoveryMode = false;
+      loginMessage.textContent = "New password saved successfully.";
+    } else {
+      await window.VVCCloud.signInWithPassword(email, password);
+      loginMessage.textContent = "Signed in successfully.";
+    }
+    closeModal(loginModal);
+    renderAdminContent();
+    openModal(adminModal);
   } catch (error) {
     loginMessage.textContent = error.message;
   } finally {
     submitButton.disabled = false;
-    submitButton.textContent = "Email Secure Sign-In Link";
+    submitButton.textContent = passwordRecoveryMode ? "Save New Password" : "Sign In";
   }
 });
+
+document
+  .getElementById("resetAdminPasswordButton")
+  ?.addEventListener("click", async () => {
+    const email = document.getElementById("adminUsername").value.trim();
+    const resetButton = document.getElementById("resetAdminPasswordButton");
+    resetButton.disabled = true;
+    resetButton.textContent = "Sending reset email…";
+    loginMessage.textContent = "";
+    try {
+      if (!window.VVCCloud) throw new Error("Cloud sign-in is temporarily unavailable.");
+      await window.VVCCloud.sendPasswordReset(email);
+      loginMessage.textContent = "Password setup email sent. Open it from the authorized inbox.";
+    } catch (error) {
+      loginMessage.textContent = error.message;
+    } finally {
+      resetButton.disabled = false;
+      resetButton.textContent = "Set / Reset Password";
+    }
+  });
 
 document
   .getElementById("logoutButton")
@@ -889,6 +922,14 @@ document
 document.addEventListener("vvc:auth", (event) => {
   const email = event.detail?.session?.user?.email?.toLowerCase();
   adminLoggedIn = email === window.VVCCloud?.adminEmail;
+  if (event.detail?.authEvent === "PASSWORD_RECOVERY") {
+    passwordRecoveryMode = true;
+    document.getElementById("adminUsername").value = window.VVCCloud.adminEmail;
+    loginForm.querySelector('button[type="submit"]').textContent = "Save New Password";
+    loginMessage.textContent = "Enter and save your new password.";
+    openModal(loginModal);
+    return;
+  }
   if (adminLoggedIn) {
     closeModal(loginModal);
     renderAdminContent();

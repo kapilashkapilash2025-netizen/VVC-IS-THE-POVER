@@ -27,9 +27,23 @@
 
   async function session() { return (await client.auth.getSession()).data.session; }
   async function isAdmin() { return (await session())?.user?.email?.toLowerCase() === ADMIN_EMAIL; }
-  async function sendMagicLink(email) {
+  function assertAdminEmail(email) {
     if (String(email).trim().toLowerCase() !== ADMIN_EMAIL) throw new Error("This email is not authorized for VVC administration.");
-    const { error } = await client.auth.signInWithOtp({ email: ADMIN_EMAIL, options: { emailRedirectTo: `${location.origin}${location.pathname}` } });
+  }
+  async function signInWithPassword(email, password) {
+    assertAdminEmail(email);
+    if (String(password).length < 8) throw new Error("Enter your admin password (minimum 8 characters).");
+    const { error } = await client.auth.signInWithPassword({ email: ADMIN_EMAIL, password: String(password) });
+    if (error) throw error;
+  }
+  async function sendPasswordReset(email) {
+    assertAdminEmail(email);
+    const { error } = await client.auth.resetPasswordForEmail(ADMIN_EMAIL, { redirectTo: `${location.origin}${location.pathname}` });
+    if (error) throw error;
+  }
+  async function updatePassword(password) {
+    if (String(password).length < 8) throw new Error("Use at least 8 characters for the new password.");
+    const { error } = await client.auth.updateUser({ password: String(password) });
     if (error) throw error;
   }
   async function signOut() { const { error } = await client.auth.signOut(); if (error) throw error; }
@@ -133,9 +147,9 @@
     if (currentSession?.user?.email?.toLowerCase() === ADMIN_EMAIL) await migrateLegacyContent();
     await Promise.all(Object.keys(STORAGE_KEYS).map(syncType));
     client.channel("vvc-shared-content").on("postgres_changes", { event: "*", schema: "public", table: "vvc_content" }, (change) => syncType(change.new?.content_type || change.old?.content_type)).on("postgres_changes", { event: "*", schema: "public", table: "vvc_reactions" }, () => syncType("achievements")).on("postgres_changes", { event: "*", schema: "public", table: "vvc_messages" }, () => syncType("achievements")).subscribe();
-    client.auth.onAuthStateChange((_event, changedSession) => { document.dispatchEvent(new CustomEvent("vvc:auth", { detail: { session: changedSession } })); if (changedSession?.user?.email?.toLowerCase() === ADMIN_EMAIL) window.setTimeout(() => migrateLegacyContent().then(() => Promise.all(Object.keys(STORAGE_KEYS).map(syncType))), 0); });
+    client.auth.onAuthStateChange((authEvent, changedSession) => { document.dispatchEvent(new CustomEvent("vvc:auth", { detail: { session: changedSession, authEvent } })); if (changedSession?.user?.email?.toLowerCase() === ADMIN_EMAIL) window.setTimeout(() => migrateLegacyContent().then(() => Promise.all(Object.keys(STORAGE_KEYS).map(syncType))), 0); });
   }
 
-  window.VVCCloud = { client, initialize, session, isAdmin, sendMagicLink, signOut, syncType, putCollection, uploadBlob, react, submitMessage, moderateMessage, adminEmail: ADMIN_EMAIL };
+  window.VVCCloud = { client, initialize, session, isAdmin, signInWithPassword, sendPasswordReset, updatePassword, signOut, syncType, putCollection, uploadBlob, react, submitMessage, moderateMessage, adminEmail: ADMIN_EMAIL };
   initialize().catch((error) => notify(`Cloud initialization failed: ${error.message}`));
 })();
