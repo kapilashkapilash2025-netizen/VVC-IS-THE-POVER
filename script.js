@@ -105,6 +105,7 @@ let activeFilter = "all";
 let adminLoggedIn = false;
 let passwordRecoveryMode = false;
 let toastTimer = null;
+let featuredGalleryRotationTimer = null;
 
 const updatesGrid = document.getElementById("updatesGrid");
 const galleryGrid = document.getElementById("galleryGrid");
@@ -452,18 +453,23 @@ function renderFeaturedGallery() {
 
   const selected = schoolGallery.filter((item) => item.featured);
   const highlights = (selected.length ? selected : schoolGallery).slice(0, 6);
+  window.clearInterval(featuredGalleryRotationTimer);
+  featuredGalleryRotationTimer = null;
   track.replaceChildren();
   showcase.hidden = highlights.length === 0;
   if (!highlights.length) return;
 
-  const displayItems = highlights.length > 1 ? [...highlights, ...highlights] : highlights;
-  displayItems.forEach((item, index) => {
+  const cards = [];
+  highlights.forEach((item, index) => {
     const button = document.createElement("button");
     button.type = "button";
     button.className = "featured-gallery-card";
     button.dataset.galleryId = item.id;
     button.setAttribute("aria-label", `View ${item.title}`);
-    if (index >= highlights.length) {
+    if (index === 0) {
+      button.classList.add("is-active");
+      button.setAttribute("aria-hidden", "false");
+    } else {
       button.setAttribute("aria-hidden", "true");
       button.tabIndex = -1;
     }
@@ -478,9 +484,29 @@ function renderFeaturedGallery() {
     caption.textContent = item.title;
     button.append(image, caption);
     track.append(button);
+    cards.push(button);
   });
 
-  track.classList.toggle("is-static", highlights.length === 1);
+  if (cards.length > 1) {
+    let activeIndex = 0;
+    featuredGalleryRotationTimer = window.setInterval(() => {
+      const previous = cards[activeIndex];
+      activeIndex = (activeIndex + 1) % cards.length;
+      const next = cards[activeIndex];
+
+      previous.classList.remove("is-active");
+      previous.classList.add("is-leaving");
+      previous.setAttribute("aria-hidden", "true");
+      previous.tabIndex = -1;
+
+      next.classList.remove("is-leaving");
+      next.classList.add("is-active");
+      next.setAttribute("aria-hidden", "false");
+      next.tabIndex = 0;
+
+      window.setTimeout(() => previous.classList.remove("is-leaving"), 900);
+    }, 5500);
+  }
 }
 
 function renderAdminContent() {
