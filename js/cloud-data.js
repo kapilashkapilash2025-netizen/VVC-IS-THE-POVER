@@ -4,7 +4,7 @@
 (() => {
   const PROJECT_URL = "https://vdzyqwigzehfqrwysqrl.supabase.co";
   const PUBLISHABLE_KEY = "sb_publishable_pLcvyeWTsBY12HPLrBWcng_H3potGl3";
-  const ADMIN_EMAIL = "kapilashkapilash25@gmail.com";
+  const ADMIN_EMAIL = "kapilashkapilash2025@gmail.com";
   const STORAGE_KEYS = { updates: "vvcSchoolUpdates", gallery: "vvcSchoolGallery", notices: "vvcOfficialPrincipalNoticesV1", achievements: "vvcAchievementWallV1" };
   const sdk = window.supabase;
   if (!sdk?.createClient) { console.warn("VVC Cloud is unavailable; device-local fallback remains active."); return; }
